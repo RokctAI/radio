@@ -1,4 +1,4 @@
-package com.dbugstation.singleradio
+package app.radio.fm
 
 import io.flutter.embedding.android.FlutterActivity
 

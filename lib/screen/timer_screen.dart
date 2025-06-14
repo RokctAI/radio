@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:single_radio/screen/radio_player.dart';
 import '../../utils/duration_extension.dart';
 import '../ads/InterstitialAd.dart';
 import '../notifier/timer_notifier.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-
+import 'package:remixicon/remixicon.dart';
 import '../utils/ColorUtils.dart';
 import '../utils/app_layout.dart';
 import '../utils/app_style.dart';
@@ -31,6 +32,26 @@ class _TimerViewState extends State<TimerView> {
       body: BlurredBackgroundWithImage(
         child: Stack(
           children: [
+            Positioned(
+                top: MediaQuery.of(context).padding.top,
+                left: 0,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
+                     // child: SvgPicture.asset('assets/images/back_arrow.svg'),
+                      child: Row(  // Use a Row to display icon and text together
+                        children: [
+                          Icon(Remix.arrow_left_line, color: Colors.white, size: 30),
+                          SizedBox(width: 10), // Add spacing between icon and text
+                          Text("Back", style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+
+                    ))),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

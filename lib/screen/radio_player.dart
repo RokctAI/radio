@@ -1,11 +1,12 @@
 import 'package:back_button_behavior/back_button_behavior.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:music_visualizer/music_visualizer.dart';
 import 'package:provider/provider.dart';
+import 'package:remixicon/remixicon.dart';
 import 'package:single_radio/widget/count_down_timer.dart';
 import 'package:text_scroll/text_scroll.dart';
+
 import '../ads/ads_callback.dart';
 import '../dialog/exit_dialog.dart';
 import '../notifier/image_url_notifier.dart';
@@ -28,7 +29,6 @@ class RadioPlayerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final adsCheck = Provider.of<AdsCallBack>(context);
     final radioModel = Provider.of<RadioNotifier>(context);
-    // final viewModel = Provider.of<TimerNotifier>(context);
     final imageUrlNotifier = Provider.of<ImageUrlNotifier>(context);
     radioModel.imageUrlNotifier = imageUrlNotifier;
     return WillPopScope(
@@ -75,24 +75,35 @@ class RadioPlayerScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                    top: MediaQuery.of(context).padding.top,
-                    left: 0,
-                    child: InkWell(
-                        onTap: () {
-                          onOpenSlider();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: isOpen
-                              ? SvgPicture.asset('assets/images/back_arrow.svg')
-                              : SvgPicture.asset('assets/images/menu.svg'),
-                        ))),
+                  top: MediaQuery.of(context).padding.top,
+                  left: 0,
+                  child: InkWell(
+                    onTap: onOpenSlider,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: isOpen
+                          ? const Row(
+                        children: [
+                          Icon(Remix.arrow_left_line, color: Colors.white, size: 30),
+                          SizedBox(width: 10),
+                          Text("Back", style: TextStyle(color: Colors.white)),
+                        ],
+                      )
+                          : const Row(
+                        children: [
+                          Icon(Remix.menu_fill, color: Colors.white, size: 30),
+                          SizedBox(width: 10),
+                          Text("Menu", style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 Positioned(
                   top: AppLayout.getHeight(80),
                   bottom: AppLayout.getHeight(180),
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: AppLayout.getHeight(30)),
+                    padding: EdgeInsets.symmetric(vertical: AppLayout.getHeight(30)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,19 +114,48 @@ class RadioPlayerScreen extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Center(
-                                  child: VinylPlayer(
-                                    artWork: radioModel.artwork != null
-                                        ? radioModel.artwork!
-                                        : radioModel.imageUrl.isNotEmpty
-                                            ? Image.network(
-                                                radioModel.imageUrl,
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Image.asset(
-                                                "assets/images/radio_img.webp",
-                                                fit: BoxFit.cover,
+                                  child: FutureBuilder(
+                                    future: radioModel.radioPlayer.getArtworkImage(),
+                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                      Image artwork;
+                                      if (snapshot.hasData) {
+                                        artwork = snapshot.data;
+                                        radioModel.imageUrlNotifier.setImage(snapshot.data);
+                                      } else {
+                                        artwork = radioModel.imageUrl.isNotEmpty
+                                            ? Image.network(radioModel.imageUrl, fit: BoxFit.cover)
+                                            : Image.asset("assets/images/radio_img.png", fit: BoxFit.cover);
+                                      }
+                                      return Stack(
+                                        children: [
+                                          VinylPlayer(
+                                            artWork: artwork,
+                                            isPlaying: radioModel.isPlaying,
+                                          ),
+                                          if (radioModel.imageUrl.isNotEmpty)
+                                            Positioned(
+                                              left: 0,
+                                              top: 0,
+                                              right: 0,
+                                              bottom: 0,
+                                              child: FutureBuilder(
+                                                future: Future.delayed(const Duration(seconds: 0)),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot.connectionState == ConnectionState.done) {
+                                                    return SizedBox(
+                                                      width: 5,
+                                                      height: 5,
+                                                      child: Image.asset('assets/images/vinylcenter.png'),
+                                                    );
+                                                  } else {
+                                                    return const SizedBox.shrink();
+                                                  }
+                                                },
                                               ),
-                                    isPlaying: radioModel.isPlaying,
+                                            ),
+                                        ],
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -141,10 +181,8 @@ class RadioPlayerScreen extends StatelessWidget {
                             children: [
                               TextScroll(
                                 radioModel.metadata?[1] ?? '',
-                                // numberOfReps: viewModel.timer != null && viewModel.timer!.isActive ? 0 : null,
                                 intervalSpaces: 7,
-                                velocity: const Velocity(
-                                    pixelsPerSecond: Offset(30, 0)),
+                                velocity: const Velocity(pixelsPerSecond: Offset(30, 0)),
                                 delayBefore: const Duration(seconds: 1),
                                 pauseBetween: const Duration(seconds: 2),
                                 style: const TextStyle(
@@ -156,10 +194,8 @@ class RadioPlayerScreen extends StatelessWidget {
                               ),
                               TextScroll(
                                 radioModel.metadata?[0] ?? '',
-                                // numberOfReps: viewModel.timer != null && viewModel.timer!.isActive ? 0 : null,
                                 intervalSpaces: 10,
-                                velocity: const Velocity(
-                                    pixelsPerSecond: Offset(40, 0)),
+                                velocity: const Velocity(pixelsPerSecond: Offset(40, 0)),
                                 delayBefore: const Duration(seconds: 1),
                                 pauseBetween: const Duration(seconds: 2),
                                 style: const TextStyle(
@@ -202,7 +238,7 @@ class RadioPlayerScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const TimerView()),
+                                        const TimerView()),
                                   );
                                 }
                               });
@@ -227,21 +263,19 @@ class RadioPlayerScreen extends StatelessWidget {
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: AppLayout.getWidth(18),
-                              vertical: AppLayout.getWidth(10)),
+                              vertical: AppLayout.getWidth(10)
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SvgPicture.asset(
-                                radioModel.currentVolume == 0
-                                    ? "assets/images/ic_volume_0.svg"
-                                    : 0 < radioModel.currentVolume &&
-                                            radioModel.currentVolume <= 40
-                                        ? "assets/images/ic_volume_1.svg"
-                                        : 40 < radioModel.currentVolume &&
-                                                radioModel.currentVolume <= 75
-                                            ? "assets/images/ic_volume_2.svg"
-                                            : "assets/images/ic_volume.svg",
+                              InkWell(
+                                onTap: () => _toggleVolume(radioModel),
+                                child: Icon(
+                                  _getVolumeIcon(radioModel.currentVolume),
+                                  color: Colors.white,
+                                  size: 35.0,
+                                ),
                               ),
                               Expanded(
                                 child: SliderTheme(
@@ -268,10 +302,10 @@ class RadioPlayerScreen extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: radioModel.togglePlayer,
-                                icon: SvgPicture.asset(
-                                  radioModel.isPlaying
-                                      ? "assets/images/ic_radio_pause.svg"
-                                      : "assets/images/ic_radio_play.svg",
+                                icon: Icon(
+                                  radioModel.isPlaying ? Remix.pause_circle_fill : Remix.play_circle_fill,
+                                  color: radioModel.isPlaying ? Colors.grey : Colors.white,
+                                  size: 48.0,
                                 ),
                                 padding: EdgeInsets.zero,
                               ),
@@ -287,5 +321,86 @@ class RadioPlayerScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _handlePlayingExit(BuildContext context, RadioNotifier radioModel) async {
+    final navigator = Navigator.of(context);
+    bool? exitConfirmed = await showDialog<bool>(
+      context: context,
+      barrierColor: Colors.black.withOpacity(.5),
+      builder: (BuildContext dialogContext) {
+        return const ExitDialog();
+      },
+    );
+
+    if (exitConfirmed == true) {
+      navigator.pop();
+    } else {
+      radioModel.backButtonPressed = true;
+      await BackButtonMethods.minimize();
+    }
+  }
+
+  Future<void> _handleNotPlayingExit(BuildContext context) async {
+    final navigator = Navigator.of(context);
+    bool? exitConfirmed = await showDialog<bool>(
+      context: context,
+      barrierColor: Colors.black.withOpacity(.5),
+      builder: (BuildContext dialogContext) {
+        return const ExitDialog(isNotPlaying: true);
+      },
+    );
+
+    if (exitConfirmed == true) {
+      navigator.pop();
+    }
+  }
+
+  void _handleTimerTap(BuildContext context, RadioNotifier radioModel, AdsCallBack adsCheck) {
+    radioModel.loadCount().then((value) {
+      if (radioModel.countAds == 0) {
+        radioModel.admobHelper.showInterad(context);
+        adsCheck.openAdsOnMessageEvent().then((value) {
+          if (value.contains(Constant.DISMISS)) {
+            radioModel.savedAds().then((_) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TimerView()),
+              );
+            });
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TimerView()),
+            );
+          }
+        });
+      } else {
+        radioModel.savedAds().then((_) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const TimerView()),
+          );
+        });
+      }
+    });
+  }
+
+  void _toggleVolume(RadioNotifier radioModel) {
+    if (radioModel.currentVolume == 0) {
+      radioModel.setVolume(100);
+    } else {
+      radioModel.setVolume(0);
+    }
+  }
+
+  IconData _getVolumeIcon(double volume) {
+    if (volume == 0) {
+      return Remix.volume_mute_fill;
+    } else if (volume <= 40) {
+      return Remix.volume_down_fill;
+    } else {
+      return Remix.volume_up_fill;
+    }
   }
 }

@@ -1,24 +1,30 @@
+
 class Constant {
-  static const String appName = 'Single Radio';
-  static const streamUrl = 'http://stream-uk1.radioparadise.com/aac-320';
-  // static const streamUrl = 'http://www.clasicradio.ro:9000/stream';
-  // static const streamUrl = 'https://a2.hostingdomain.com:6567/radio.mp3';
-  // static const streamUrl = 'https://air.pc.cdn.bitgravity.com/air/live/pbaudio022/master.m3u8';
+  static String appName = 'Musina FM';
+  static String appMotto = 'Can you handle the Heat?';
+  static String streamUrl = 'https://stream.zeno.fm/jsaf9vnqd0wtv';
+  //static String streamUrl = 'https://stream.zeno.fm/4w1vq4a2ekhvv'; //metroFM
 
-  static const String twitterUrl = 'https://twitter.com';
-  static const String facebookUrl = 'https://www.facebook.com';
-  static const String whatsappUrl = 'https://www.whatsapp.com';
-  static const String privacyUrl = 'https://dbugstation.com/';
-  static const String aboutUsUrl = 'https://dbugstation.com/about';
-  static const String rateUsUrl = 'https://play.google.com/store/apps/details?id=com.example.app';
+  //static String streamUrl = 'https://a2.hostingdomain.com:6567/radio.mp3';
+  // static String streamUrl = 'https://air.pc.cdn.bitgravity.com/air/live/pbaudio022/master.m3u8';
+  static String minAppVersion = '1.2.7';
+  static String twitterUrl = 'https://twitter.com';
+  static String facebookUrl = 'https://facebook.com/profile.php?id=100076662353886';
+  static String whatsappUrl = 'https://api.whatsapp.com/send?phone=27711327578';
+  static String privacyUrl = 'https://dbugstation.com/';
+  static String aboutUsUrl = 'https://dbugstation.com/about';
+  static String rateUsUrl = 'https://play.google.com/store/apps/details?id=app.radio.fm';
+  static const String messagingSenderId = "728921419683";
+  // Set to false to disable ads
+  static bool showADS = false;
 
-
-  static const String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
+  static String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
 
   //vinyl movement variable
   //if you want to stop rotating set isRotate false
   static const bool isRotate = true;
   //need to change your desire ads code and ID
+
 
   // Admob ads Code & Id For Android
   static const String AdmobAppId = 'ca-app-pub-3940256099942544~3347511713';
@@ -52,7 +58,7 @@ class Constant {
   // set ADSKEY "0"
   // if facebook ads "1"
   // else Unity ads "2"
-  static const String ADSKEY = "0";
+  static String ADSKEY = "3";
 
   //After showing an ad, how many clicks will show another ad?
   static const int Ads_Interval = 1;

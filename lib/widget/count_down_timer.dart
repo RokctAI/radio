@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:remixicon/remixicon.dart';
 
 import '../notifier/timer_notifier.dart';
 import '../utils/app_layout.dart';
@@ -25,7 +26,7 @@ class CountDownTimer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: AppLayout.getWidth(130),
+                    width: AppLayout.getWidth(100),
                     height: AppLayout.getHeight(40),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(13)),
@@ -66,8 +67,12 @@ class CountDownTimer extends StatelessWidget {
                       onTap: () {
                         viewModel.stopTimer();
                       },
-                      child: SvgPicture.asset('assets/images/ic_cross.svg'))
-                ],
+                      child: const Icon(
+                        Remix.close_line, // Replace with the specific Remix icon
+                        color: Colors.white,
+                       // size: 290,
+                      )
+                  )],
               )
             : GestureDetector(
                 onTap: () {
@@ -84,7 +89,11 @@ class CountDownTimer extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/images/ic_timer.svg'),
+                      const Icon(
+                        Remix.timer_line, // Replace with the specific Remix icon
+                        color: Colors.white,
+                        //size: 290,
+                      ),
                       Gap(AppLayout.getWidth(10)),
                       const Text(
                         'Set Timer',
