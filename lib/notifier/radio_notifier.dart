@@ -9,7 +9,6 @@ import '../utils/app_pref.dart';
 import 'image_url_notifier.dart';
 import 'package:http/http.dart' as http;
 
-
 class RadioNotifier with ChangeNotifier {
   final RadioPlayer radioPlayer = RadioPlayer();
   ImageUrlNotifier imageUrlNotifier = ImageUrlNotifier();
@@ -60,6 +59,8 @@ class RadioNotifier with ChangeNotifier {
     notifyListeners();
   }
 
+  Image? artwork;
+
   Future<void> _initRadioPlayer() async {
     try {
       radioPlayer.setChannel(
@@ -72,10 +73,15 @@ class RadioNotifier with ChangeNotifier {
         notifyListeners();
       });
 
-      radioPlayer.metadataStream.listen((value) {
+      radioPlayer.metadataStream.listen((value) async {
         metadata = value;
+        if (metadata != null && metadata![2].isNotEmpty) {
+          imageUrl = metadata![2];
+          imageUrlNotifier.setImageUrl(imageUrl);
+        } else {
+          fetchSongImage();
+        }
         notifyListeners();
-        fetchSongImage();
       });
     } catch (e) {
       print("Error initializing radio player: $e");

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../ads/AppOpenAdManager.dart';
+import '../ads/open_ad_manager.dart';
 import '../ads/InterstitialAd.dart';
 import '../notifier/theme_provider.dart';
 

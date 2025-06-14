@@ -1,6 +1,6 @@
 # single_radio
 
-A new Flutter Single Radio.
+A new Flutter project.
 
 ## Getting Started
 

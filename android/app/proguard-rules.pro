@@ -1,0 +1,3 @@
+ -keep class com.google.facebook.** { *; }
+ -dontwarn io.flutter.embedding.**
+ -ignorewarnings

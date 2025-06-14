@@ -10,8 +10,7 @@ class VinylPlayer extends StatefulWidget {
   final Image artWork;
 
   const VinylPlayer(
-      {Key? key, required this.artWork, required this.isPlaying,})
-      : super(key: key);
+      {super.key, required this.artWork, required this.isPlaying,});
 
   @override
   _VinylPlayerState createState() => _VinylPlayerState();

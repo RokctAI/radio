@@ -6,14 +6,10 @@ import 'package:music_visualizer/music_visualizer.dart';
 import 'package:provider/provider.dart';
 import 'package:single_radio/widget/count_down_timer.dart';
 import 'package:text_scroll/text_scroll.dart';
-
-import '../../utils/duration_extension.dart';
 import '../ads/ads_callback.dart';
 import '../dialog/exit_dialog.dart';
 import '../notifier/image_url_notifier.dart';
 import '../notifier/radio_notifier.dart';
-import '../notifier/timer_notifier.dart';
-import '../utils/ColorUtils.dart';
 import '../utils/Constant.dart';
 import '../utils/app_layout.dart';
 import '../widget/blur_bg_widget.dart';
@@ -61,7 +57,9 @@ class RadioPlayerScreen extends StatelessWidget {
               context: context,
               barrierColor: Colors.black.withOpacity(.5),
               builder: (BuildContext dialogContext) {
-                return const ExitDialog(isNotPlaying:true,);
+                return const ExitDialog(
+                  isNotPlaying: true,
+                );
               },
             );
             return exitConfirmed ?? false;
@@ -105,32 +103,19 @@ class RadioPlayerScreen extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Center(
-                                  child: FutureBuilder(
-                                    future: radioModel.radioPlayer
-                                        .getArtworkImage(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
-                                      Image artwork;
-                                      if (snapshot.hasData) {
-                                        artwork = snapshot.data;
-                                        radioModel.imageUrlNotifier
-                                            .setImage(snapshot.data);
-                                      } else {
-                                        radioModel.imageUrl.isNotEmpty
-                                            ? artwork = Image.network(
+                                  child: VinylPlayer(
+                                    artWork: radioModel.artwork != null
+                                        ? radioModel.artwork!
+                                        : radioModel.imageUrl.isNotEmpty
+                                            ? Image.network(
                                                 radioModel.imageUrl,
                                                 fit: BoxFit.cover,
                                               )
-                                            : artwork = Image.asset(
+                                            : Image.asset(
                                                 "assets/images/radio_img.webp",
                                                 fit: BoxFit.cover,
-                                              );
-                                      }
-                                      return VinylPlayer(
-                                        artWork: artwork,
-                                        isPlaying: radioModel.isPlaying,
-                                      );
-                                    },
+                                              ),
+                                    isPlaying: radioModel.isPlaying,
                                   ),
                                 ),
                               ],
@@ -197,46 +182,42 @@ class RadioPlayerScreen extends StatelessWidget {
                   right: 20,
                   child: Column(
                     children: [
-                      CountDownTimer(onTap: (){
-                        radioModel.loadCount().then((value) {
-                          if (radioModel.countAds == 0) {
-                            radioModel.admobHelper
-                                .showInterad(context);
-                            adsCheck
-                                .openAdsOnMessageEvent()
-                                .then((value) {
-                              if (value
-                                  .contains(Constant.DISMISS)) {
-                                radioModel.savedAds().then((value) {
+                      CountDownTimer(
+                        onTap: () {
+                          radioModel.loadCount().then((value) {
+                            if (radioModel.countAds == 0) {
+                              radioModel.admobHelper.showInterad(context);
+                              adsCheck.openAdsOnMessageEvent().then((value) {
+                                if (value.contains(Constant.DISMISS)) {
+                                  radioModel.savedAds().then((value) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const TimerView(),
+                                      ),
+                                    );
+                                  });
+                                } else {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                      const TimerView(),
-                                    ),
+                                        builder: (context) =>
+                                            const TimerView()),
                                   );
-                                });
-                              } else {
+                                }
+                              });
+                            } else {
+                              radioModel.savedAds().then((value) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                      const TimerView()),
+                                      builder: (context) => const TimerView()),
                                 );
-                              }
-                            });
-                          } else {
-                            radioModel.savedAds().then((value) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const TimerView()),
-                              );
-                            });
-                          }
-                        });
-                      },),
+                              });
+                            }
+                          });
+                        },
+                      ),
                       Gap(AppLayout.getHeight(20)),
                       if (radioModel.isGetVol)
                         Container(

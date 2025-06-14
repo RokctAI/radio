@@ -1,6 +1,7 @@
 class Constant {
   static const String appName = 'Single Radio';
-  static const streamUrl = 'http://www.clasicradio.ro:9000/stream';
+  static const streamUrl = 'http://stream-uk1.radioparadise.com/aac-320';
+  // static const streamUrl = 'http://www.clasicradio.ro:9000/stream';
   // static const streamUrl = 'https://a2.hostingdomain.com:6567/radio.mp3';
   // static const streamUrl = 'https://air.pc.cdn.bitgravity.com/air/live/pbaudio022/master.m3u8';
 

@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../ads/AppOpenAdManager.dart';
+import '../ads/open_ad_manager.dart';
 import '../dialog/no_internet_dialog.dart';
 import '../notifier/radio_notifier.dart';
 import '../utils/Constant.dart';
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
   @override
   void initState() {
     super.initState();
-    _subscription = Connectivity().onConnectivityChanged.listen(_checkConnectivity);
+    // _subscription = Connectivity().onConnectivityChanged.listen(_checkConnectivity);
     _checkConnectivityOpen();
     appOpenAdManager.loadAd();
     WidgetsBinding.instance.addObserver(this);
