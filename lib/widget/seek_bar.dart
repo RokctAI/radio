@@ -1,5 +1,4 @@
-﻿import 'dart:ui';
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class VerticalSeekBar extends StatefulWidget {
   final Color thumbColor;
@@ -20,7 +19,7 @@ class VerticalSeekBar extends StatefulWidget {
   });
 
   @override
-  _VerticalSeekBarState createState() => _VerticalSeekBarState();
+  State<VerticalSeekBar> createState() => _VerticalSeekBarState();
 }
 
 class _VerticalSeekBarState extends State<VerticalSeekBar> {

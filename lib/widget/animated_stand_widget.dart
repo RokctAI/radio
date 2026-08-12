@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AnimatedStand extends StatefulWidget {
@@ -7,7 +7,7 @@ class AnimatedStand extends StatefulWidget {
   const AnimatedStand({super.key, required this.isPlaying});
 
   @override
-  _AnimatedStandState createState() => _AnimatedStandState();
+  State<AnimatedStand> createState() => _AnimatedStandState();
 }
 
 class _AnimatedStandState extends State<AnimatedStand>

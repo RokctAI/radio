@@ -1,4 +1,4 @@
-import 'package:blur/blur.dart';
+﻿import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +9,7 @@ class BlurredBackgroundWithImage extends StatelessWidget {
   final Widget child;
   final double? height;
 
-  const BlurredBackgroundWithImage({Key? key, required this.child, this.height})
-      : super(key: key);
+  const BlurredBackgroundWithImage({super.key, required this.child, this.height});
 
   @override
   Widget build(BuildContext context) {

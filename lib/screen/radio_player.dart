@@ -307,6 +307,7 @@ class RadioPlayerScreen extends StatelessWidget {
     final navigator = Navigator.of(context);
 
     await radioModel.loadCount();
+    if (!navigator.mounted) return;
 
     if (radioModel.countAds == 0) {
       radioModel.admobHelper.showInterad(navigator.context);

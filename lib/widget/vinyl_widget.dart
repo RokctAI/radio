@@ -13,7 +13,7 @@ class VinylPlayer extends StatefulWidget {
       {super.key, required this.artWork, required this.isPlaying,});
 
   @override
-  _VinylPlayerState createState() => _VinylPlayerState();
+  State<VinylPlayer> createState() => _VinylPlayerState();
 }
 
 class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStateMixin {
