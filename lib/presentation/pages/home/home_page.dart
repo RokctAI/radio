@@ -1,5 +1,6 @@
 ﻿import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -15,14 +16,15 @@ import 'package:single_radio/presentation/styles/app_style.dart';
 import 'package:single_radio/presentation/component/blurred_background.dart';
 import 'package:single_radio/presentation/pages/radio_player/radio_player_page.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+@RoutePage(name: 'HomeRoute')
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   final GlobalKey<SliderDrawerState> _sliderDrawerKey =
   GlobalKey<SliderDrawerState>();
   bool isDrawerOpen = false;
@@ -118,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 });
               },
             ),
-            child: RadioPlayerScreen(
+            child: RadioPlayerPage(
                 onOpenSlider: () {
                   if (_sliderDrawerKey.currentState!.isDrawerOpen) {
                     _sliderDrawerKey.currentState!.closeSlider();

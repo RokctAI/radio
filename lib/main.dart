@@ -12,7 +12,7 @@ import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 import 'package:single_radio/infrastructure/services/remote_config.dart';
 import 'package:single_radio/infrastructure/services/remote_config_provider.dart';
 import 'package:single_radio/application/theme/theme_provider.dart';
-import 'package:single_radio/presentation/pages/splash/splash_page.dart';
+import 'package:single_radio/presentation/routes/app_router.dart';
 import 'package:single_radio/app_constants.dart';
 import 'package:single_radio/utils/app_pref.dart';
 
@@ -69,7 +69,7 @@ void main() async {
         overrides: [
           remoteConfigProvider.overrideWithValue(remoteConfigService),
         ],
-        child: const MyApp(),
+        child: MyApp(),
       ),
     );
   } catch (e, stackTrace) {
@@ -81,14 +81,16 @@ void main() async {
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = ref.watch(themeProvider).isDark;
-    return MaterialApp(
+    return MaterialApp.router(
       theme: isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
-      home: const SplashScreen(),
+      routerConfig: _appRouter.config(),
       debugShowCheckedModeBanner: false,
     );
   }

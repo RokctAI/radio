@@ -1,23 +1,24 @@
 ﻿import 'package:flutter/foundation.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:single_radio/infrastructure/services/open_ad_manager.dart';
 import 'package:single_radio/infrastructure/services/interstitial_ad.dart';
 import 'package:single_radio/app_constants.dart';
+import 'package:single_radio/presentation/routes/app_router.dart';
 import 'package:single_radio/utils/app_layout.dart';
-import 'package:single_radio/presentation/pages/home/home_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:single_radio/presentation/pages/webview/webview_page.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+@RoutePage(name: 'SplashRoute')
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   AppOpenAdManager appOpenAdManager = AppOpenAdManager();
 
   @override
@@ -101,18 +102,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if (AppOpenAdManager.isLoaded) {
       appOpenAdManager.showAdIfAvailable(context);
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
+    context.router.replace(const HomeRoute());
   }
 
   void navigateToWebView() {
     if (!mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => WebViewPage(url: Constant.rateUsUrl)),
-    );
+    context.router.replace(WebViewRoute(url: Constant.rateUsUrl));
   }
 
   bool isVersionGreaterOrEqual(String currentVersion, String minVersion) {

@@ -1,4 +1,5 @@
 ﻿import 'package:back_button_behavior/back_button_behavior.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,7 @@ import 'package:single_radio/utils/app_layout.dart';
 import 'package:single_radio/presentation/component/blurred_background.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/seek_bar.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/vinyl_player.dart';
-import 'package:single_radio/presentation/pages/timer/timer_page.dart';
+import 'package:single_radio/presentation/routes/app_router.dart';
 
 /// Visualiser bar styling. Presentation data, so it lives with the page
 /// rather than on the notifier -- application must not import presentation.
@@ -30,11 +31,11 @@ final List<Color> _barColors = [
 ];
 const List<int> _barDurations = [900, 700, 600, 800, 500];
 
-class RadioPlayerScreen extends ConsumerWidget {
+class RadioPlayerPage extends ConsumerWidget {
   final Function() onOpenSlider;
   final bool isOpen;
 
-  const RadioPlayerScreen(
+  const RadioPlayerPage(
       {super.key, required this.onOpenSlider, required this.isOpen});
 
   @override
@@ -310,6 +311,7 @@ class RadioPlayerScreen extends ConsumerWidget {
   /// check available to fall back on.
   Future<void> _openTimer(BuildContext context, WidgetRef ref) async {
     final navigator = Navigator.of(context);
+    final router = AutoRouter.of(context);
     final playback = ref.read(playbackProvider.notifier);
 
     await playback.loadCount();
@@ -324,9 +326,7 @@ class RadioPlayerScreen extends ConsumerWidget {
       await playback.savedAds();
     }
 
-    navigator.push(
-      MaterialPageRoute(builder: (context) => const TimerView()),
-    );
+    router.push(const TimerRoute());
   }
 
   void _toggleVolume(WidgetRef ref) {

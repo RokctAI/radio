@@ -1,4 +1,5 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,16 +13,17 @@ import 'package:single_radio/presentation/styles/app_style.dart';
 import 'package:single_radio/utils/language.dart';
 import 'package:single_radio/presentation/component/blurred_background.dart';
 
-class TimerView extends ConsumerStatefulWidget {
-  const TimerView({super.key});
+@RoutePage(name: 'TimerRoute')
+class TimerPage extends ConsumerStatefulWidget {
+  const TimerPage({super.key});
 
   static const routeName = '/timer';
 
   @override
-  ConsumerState<TimerView> createState() => _TimerViewState();
+  ConsumerState<TimerPage> createState() => _TimerPageState();
 }
 
-class _TimerViewState extends ConsumerState<TimerView> {
+class _TimerPageState extends ConsumerState<TimerPage> {
 
   @override
   Widget build(BuildContext context) {
