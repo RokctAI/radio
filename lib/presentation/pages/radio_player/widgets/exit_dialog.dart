@@ -14,18 +14,18 @@ class ExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppStyle.whiteAlpha(.08),
+      backgroundColor: RadioStyle.whiteAlpha(.08),
       surfaceTintColor: AppStyle.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: AppStyle.whiteAlpha(.08),
+          color: RadioStyle.whiteAlpha(.08),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: AppStyle.whiteAlpha(.15)
+            color: RadioStyle.whiteAlpha(.15)
           ),
           boxShadow: [
             BoxShadow(
-              color: AppStyle.blackAlpha(0.15),
+              color: RadioStyle.blackAlpha(0.15),
               blurRadius: 30.0,
               offset: const Offset(0.0, 20.0),
             ),
@@ -53,7 +53,7 @@ class ExitDialog extends StatelessWidget {
                   Divider(
                     height: 1,
                     thickness: 1,
-                    color: AppStyle.whiteAlpha(.4),
+                    color: RadioStyle.whiteAlpha(.4),
                   ),
                   Gap(AppLayout.getHeight(20)),
                   Padding(
@@ -78,7 +78,7 @@ class ExitDialog extends StatelessWidget {
                           Navigator.of(context).pop( isNotPlaying??false?false:true);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppStyle.whiteAlpha(.15),
+                          backgroundColor: RadioStyle.whiteAlpha(.15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),

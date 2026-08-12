@@ -24,10 +24,10 @@ import 'package:single_radio/presentation/routes/app_router.dart';
 /// Visualiser bar styling. Presentation data, so it lives with the page
 /// rather than on the notifier -- application must not import presentation.
 final List<Color> _barColors = [
-  AppStyle.whiteAlpha(0.5),
-  AppStyle.whiteAlpha(0.5),
-  AppStyle.whiteAlpha(0.5),
-  AppStyle.whiteAlpha(0.5),
+  RadioStyle.whiteAlpha(0.5),
+  RadioStyle.whiteAlpha(0.5),
+  RadioStyle.whiteAlpha(0.5),
+  RadioStyle.whiteAlpha(0.5),
 ];
 const List<int> _barDurations = [900, 700, 600, 800, 500];
 
@@ -64,7 +64,7 @@ class RadioPlayerPage extends ConsumerWidget {
         // stay nullable -- reading it as a plain bool threw.
         final exitConfirmed = await showDialog<bool>(
           context: context,
-          barrierColor: AppStyle.blackAlpha(.5),
+          barrierColor: RadioStyle.blackAlpha(.5),
           builder: (BuildContext dialogContext) {
             return ExitDialog(isNotPlaying: !wasPlaying);
           },
@@ -242,7 +242,7 @@ class RadioPlayerPage extends ConsumerWidget {
                         Container(
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(18)),
-                            color: AppStyle.surfaceOverlay,
+                            color: RadioStyle.surfaceOverlay,
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: AppLayout.getWidth(18),
@@ -269,8 +269,8 @@ class RadioPlayerPage extends ConsumerWidget {
                                     ),
                                     thumbColor: AppStyle.white,
                                     overlayColor: AppStyle.transparent,
-                                    activeTrackColor: AppStyle.trackInactive,
-                                    inactiveTrackColor: AppStyle.trackInactive,
+                                    activeTrackColor: RadioStyle.trackInactive,
+                                    inactiveTrackColor: RadioStyle.trackInactive,
                                   ),
                                   child: Slider(
                                     value: radioModel.volume,

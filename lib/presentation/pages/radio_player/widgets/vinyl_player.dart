@@ -56,7 +56,7 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: AppStyle.strokeSubtle,
+              color: RadioStyle.strokeSubtle,
             ),
             child: Stack(
               children: [
@@ -67,7 +67,7 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
                   bottom: -16,
                   child: Icon(
                     Remix.circle_fill,
-                    color: AppStyle.whiteAlpha(0.17),
+                    color: RadioStyle.whiteAlpha(0.17),
                     size: 290,
                   ),
                 ),
@@ -105,13 +105,13 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: AppStyle.strokeSubtle,
+                color: RadioStyle.strokeSubtle,
                 width: 4.0,
               ),
             ),
             child: const Icon(
               Remix.square_fill,
-              color: AppStyle.scrim,
+              color: RadioStyle.scrim,
               size: 15,
             ),
           ),
@@ -124,13 +124,13 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
               color: AppStyle.textGrey,
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppStyle.strokeSubtle,
+                color: RadioStyle.strokeSubtle,
                 width: 3.0,
               ),
             ),
             child: Icon(
               widget.isPlaying ? Remix.edit_circle_fill : Remix.shut_down_fill,
-              color: AppStyle.inkMuted,
+              color: RadioStyle.inkMuted,
               size: 20,
             ),
           ),

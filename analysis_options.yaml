@@ -9,6 +9,13 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  errors:
+    # SDK-internal files are imported as package:<sdk>/src/... by design --
+    # SDK_README states it, and base_sdk's own installed theme template does
+    # it. The lint is a false positive against this architecture.
+    implementation_imports: ignore
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`

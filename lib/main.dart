@@ -19,6 +19,9 @@ import 'package:single_radio/utils/app_pref.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // base_sdk ships neutral tokens; this injects the app's palette.
+  applyAppBrandColors();
+
   late final RemoteConfigService remoteConfigService;
 
   try {

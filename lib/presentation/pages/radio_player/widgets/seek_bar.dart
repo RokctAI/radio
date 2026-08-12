@@ -97,7 +97,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
     final Offset thumbCenter = center.translate(0, thumbRadius - outerThumbRadius);
 
     final Paint paint = Paint();
-    paint.color = AppStyle.trackInactive;
+    paint.color = RadioStyle.trackInactive;
     canvas.drawCircle(thumbCenter, outerThumbRadius, paint);
 
     paint.color = AppStyle.white; // Set color for the inner circle
@@ -156,7 +156,7 @@ class CustomSliderTrackShape extends SliderTrackShape {
     final canvas = context.canvas;
 
     final Paint paint = Paint()
-      ..color = AppStyle.trackInactive
+      ..color = RadioStyle.trackInactive
       ..strokeCap = StrokeCap.round
       ..strokeWidth = trackHeight;
 

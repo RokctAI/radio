@@ -31,7 +31,7 @@ class CountDownTimer extends ConsumerWidget {
                     height: AppLayout.getHeight(40),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(13)),
-                      color: AppStyle.surfaceOverlayAlt,
+                      color: RadioStyle.surfaceOverlayAlt,
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,8 +54,8 @@ class CountDownTimer extends ConsumerWidget {
                       data: SliderThemeData(
                         trackHeight: 4.0,
                         overlayColor: AppStyle.transparent,
-                        activeTrackColor: AppStyle.whiteAlpha(.75),
-                        inactiveTrackColor: AppStyle.whiteAlpha(.35),
+                        activeTrackColor: RadioStyle.whiteAlpha(.75),
+                        inactiveTrackColor: RadioStyle.whiteAlpha(.35),
                         thumbShape: SliderComponentShape.noThumb,
                       ),
                       child: Slider(
@@ -82,7 +82,7 @@ class CountDownTimer extends ConsumerWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(29)),
-                    color: AppStyle.surfaceOverlayAlt,
+                    color: RadioStyle.surfaceOverlayAlt,
                   ),
                   padding: EdgeInsets.symmetric(
                       horizontal: AppLayout.getWidth(13),
