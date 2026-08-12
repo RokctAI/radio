@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
 import '../utils/Constant.dart';
@@ -66,7 +66,7 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
                   bottom: -16,
                   child: Icon(
                     Remix.circle_fill,
-                    color: Colors.white.withOpacity(0.17),
+                    color: Colors.white.withValues(alpha: 0.17),
                     size: 290,
                   ),
                 ),

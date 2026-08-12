@@ -1,4 +1,4 @@
-import 'dart:ui';
+﻿import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -13,18 +13,18 @@ class ExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white.withOpacity(.08),
+      backgroundColor: Colors.white.withValues(alpha: .08),
       surfaceTintColor: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(.08),
+          color: Colors.white.withValues(alpha: .08),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Colors.white.withOpacity(.15)
+            color: Colors.white.withValues(alpha: .15)
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withValues(alpha: 0.15),
               blurRadius: 30.0,
               offset: const Offset(0.0, 20.0),
             ),
@@ -52,7 +52,7 @@ class ExitDialog extends StatelessWidget {
                   Divider(
                     height: 1,
                     thickness: 1,
-                    color: Colors.white.withOpacity(.4),
+                    color: Colors.white.withValues(alpha: .4),
                   ),
                   Gap(AppLayout.getHeight(20)),
                   Padding(
@@ -77,7 +77,7 @@ class ExitDialog extends StatelessWidget {
                           Navigator.of(context).pop( isNotPlaying??false?false:true);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white.withOpacity(.15),
+                          backgroundColor: Colors.white.withValues(alpha: .15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),

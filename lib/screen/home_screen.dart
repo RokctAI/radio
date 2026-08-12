@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -227,7 +227,7 @@ class _SliderView extends StatelessWidget {
                   'Version: ${snapshot.data ?? ''}',
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Styles.primaryColor.withOpacity(0.7),
+                    color: Styles.primaryColor.withValues(alpha: 0.7),
                     fontFamily: 'ClashGrotesk',
                     fontWeight: FontWeight.w400,
                   ),

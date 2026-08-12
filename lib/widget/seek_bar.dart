@@ -1,4 +1,4 @@
-import 'dart:ui';
+﻿import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class VerticalSeekBar extends StatefulWidget {
@@ -144,7 +144,7 @@ class CustomSliderTrackShape extends SliderTrackShape {
         bool isDiscrete = false,
         bool isEnabled = false,
       }) {
-    print("efrbgnh $secondaryOffset");
+    debugPrint("efrbgnh $secondaryOffset");
     final double trackHeight = isDiscrete ? progressHeight : defaultHeight;
     final Rect trackRect = getPreferredRect(
       parentBox: parentBox,

@@ -1,5 +1,6 @@
 import 'package:back_button_behavior/back_button_behavior.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:music_visualizer/music_visualizer.dart';
 import 'package:provider/provider.dart';
@@ -31,41 +32,44 @@ class RadioPlayerScreen extends StatelessWidget {
     final radioModel = Provider.of<RadioNotifier>(context);
     final imageUrlNotifier = Provider.of<ImageUrlNotifier>(context);
     radioModel.imageUrlNotifier = imageUrlNotifier;
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      // WillPopScope is deprecated. canPop stays false so the back gesture is
+      // always handled here, which means the confirmed-exit path now has to
+      // leave explicitly -- onWillPop used to do that by returning true at the
+      // root route. ExitDialog pops true for "exit" in both of its modes, so
+      // the playing and not-playing branches collapse into one.
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+
         if (isOpen) {
           onOpenSlider();
-          return false;
-        } else {
-          if (radioModel.isPlaying) {
-            // showDialog returns null when the barrier is tapped, so this
-            // must stay nullable -- reading it as a plain bool threw.
-            final exitConfirmed = await showDialog<bool>(
-              context: context,
-              barrierColor: Colors.black.withOpacity(.5),
-              builder: (BuildContext dialogContext) {
-                return const ExitDialog();
-              },
-            );
-            if (exitConfirmed == true) {
-              return true;
-            } else {
-              radioModel.backButtonPressed = true;
-              await BackButtonMethods.minimize();
-              return false;
-            }
+          return;
+        }
+
+        final navigator = Navigator.of(context);
+        final wasPlaying = radioModel.isPlaying;
+
+        // showDialog returns null when the barrier is tapped, so this must
+        // stay nullable -- reading it as a plain bool threw.
+        final exitConfirmed = await showDialog<bool>(
+          context: context,
+          barrierColor: Colors.black.withValues(alpha: .5),
+          builder: (BuildContext dialogContext) {
+            return ExitDialog(isNotPlaying: !wasPlaying);
+          },
+        );
+
+        if (exitConfirmed == true) {
+          if (navigator.canPop()) {
+            navigator.pop();
           } else {
-            final exitConfirmed = await showDialog<bool>(
-              context: context,
-              barrierColor: Colors.black.withOpacity(.5),
-              builder: (BuildContext dialogContext) {
-                return const ExitDialog(
-                  isNotPlaying: true,
-                );
-              },
-            );
-            return exitConfirmed ?? false;
+            await SystemNavigator.pop();
           }
+        } else if (wasPlaying) {
+          // "Background" -- keep playing, drop the app to the launcher.
+          radioModel.backButtonPressed = true;
+          await BackButtonMethods.minimize();
         }
       },
       child: GestureDetector(

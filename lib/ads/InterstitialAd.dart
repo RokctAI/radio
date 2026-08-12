@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 import 'package:facebook_audience_network/ad/ad_banner.dart';
 import 'package:facebook_audience_network/ad/ad_interstitial.dart';
@@ -57,15 +57,15 @@ class AdmobHelper {
       }
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
           onAdShowedFullScreenContent: (InterstitialAd ad) {
-        print("ad onAdshowedFullscreen");
+        debugPrint("ad onAdshowedFullscreen");
       }, onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print("ad Disposed");
+        debugPrint("ad Disposed");
         ad.dispose();
         createInterad();
         Provider.of<AdsCallBack>(context, listen: false).setDismiss();
       }, onAdFailedToShowFullScreenContent:
               (InterstitialAd ad, AdError aderror) {
-        print('$ad OnAdFailed $aderror');
+        debugPrint('$ad OnAdFailed $aderror');
         ad.dispose();
         createInterad();
         Provider.of<AdsCallBack>(context, listen: false).setFailed();
@@ -81,18 +81,18 @@ class AdmobHelper {
   static Future<void> loadUnityIntAd() async {
     await UnityAds.load(
       placementId: Platform.isIOS?Constant.UNITY_INTER_PLACEMENT_ID_IOS:Constant.UNITY_INTER_PLACEMENT_ID,
-      onComplete: (placementId) => print('Load Complete $placementId'),
+      onComplete: (placementId) => debugPrint('Load Complete $placementId'),
       onFailed: (placementId, error, message) =>
-          print('Load Failed $placementId: $error $message'),
+          debugPrint('Load Failed $placementId: $error $message'),
     );
   }
 
   static Future<void> showIntAd() async {
     UnityAds.showVideoAd(
         placementId: Platform.isIOS?Constant.UNITY_INTER_PLACEMENT_ID_IOS:Constant.UNITY_INTER_PLACEMENT_ID,
-        onStart: (placementId) => print('Video Ad $placementId started'),
-        onClick: (placementId) => print('Video Ad $placementId click'),
-        onSkipped: (placementId) => print('Video Ad $placementId skipped'),
+        onStart: (placementId) => debugPrint('Video Ad $placementId started'),
+        onClick: (placementId) => debugPrint('Video Ad $placementId click'),
+        onSkipped: (placementId) => debugPrint('Video Ad $placementId skipped'),
         onComplete: (placementId) async {
           await loadUnityIntAd();
         },
@@ -145,7 +145,7 @@ class AdmobHelper {
       placementId: bannerCode,
       bannerSize: fb.BannerSize.STANDARD,
       listener: (result, value) {
-        print("Banner Ad: $result -->  $value");
+        debugPrint("Banner Ad: $result -->  $value");
       },
     );
   }
@@ -159,7 +159,9 @@ class AdmobHelper {
   }
   static BannerAd getBannerAd() {
     BannerAd bAd = BannerAd(
-        size: AdSize.smartBanner,
+        // smartBanner is deprecated. banner is the fixed 320x50 slot, which
+        // matches the 50px height showBanner already reserves.
+        size: AdSize.banner,
         adUnitId: bannerCode,
         listener: BannerAdListener(
             onAdClosed: (Ad ad) {},

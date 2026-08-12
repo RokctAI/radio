@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import '../../utils/duration_extension.dart';
@@ -248,10 +248,10 @@ class _Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(textColor),
-        backgroundColor: MaterialStateProperty.all<Color>(color),
-        minimumSize: MaterialStateProperty.all<Size>(const Size(250, 45)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        foregroundColor: WidgetStateProperty.all<Color>(textColor),
+        backgroundColor: WidgetStateProperty.all<Color>(color),
+        minimumSize: WidgetStateProperty.all<Size>(const Size(250, 45)),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),

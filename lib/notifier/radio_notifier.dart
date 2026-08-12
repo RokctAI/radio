@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:radio_player/radio_player.dart';
 import 'package:volume_regulator/volume_regulator.dart';
@@ -27,10 +27,10 @@ class RadioNotifier with ChangeNotifier {
   late List<Widget> imageSliders;
 
   final List<Color> colors = [
-    Colors.white.withOpacity(0.5),
-    Colors.white.withOpacity(0.5),
-    Colors.white.withOpacity(0.5),
-    Colors.white.withOpacity(0.5),
+    Colors.white.withValues(alpha: 0.5),
+    Colors.white.withValues(alpha: 0.5),
+    Colors.white.withValues(alpha: 0.5),
+    Colors.white.withValues(alpha: 0.5),
   ];
 
   final List<int> duration = [900, 700, 600, 800, 500];
@@ -84,7 +84,7 @@ class RadioNotifier with ChangeNotifier {
         notifyListeners();
       });
     } catch (e) {
-      print("Error initializing radio player: $e");
+      debugPrint("Error initializing radio player: $e");
     }
   }
 

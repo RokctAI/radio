@@ -1,5 +1,6 @@
-// firebase_init.dart
+﻿// firebase_init.dart
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'Constant.dart';
 
 Future<void> initializeFirebase() async {
@@ -12,9 +13,9 @@ Future<void> initializeFirebase() async {
         projectId: "juvofood",
       ),
     );
-    print('Firebase initialized successfully in firebase_init.dart');
+    debugPrint('Firebase initialized successfully in firebase_init.dart');
   } catch (e) {
-    print('Failed to initialize Firebase: $e');
+    debugPrint('Failed to initialize Firebase: $e');
     rethrow;
   }
 }

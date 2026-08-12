@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -53,8 +53,8 @@ class CountDownTimer extends StatelessWidget {
                       data: SliderThemeData(
                         trackHeight: 4.0,
                         overlayColor: Colors.transparent,
-                        activeTrackColor: Colors.white.withOpacity(.75),
-                        inactiveTrackColor: Colors.white.withOpacity(.35),
+                        activeTrackColor: Colors.white.withValues(alpha: .75),
+                        inactiveTrackColor: Colors.white.withValues(alpha: .35),
                         thumbShape: SliderComponentShape.noThumb,
                       ),
                       child: Slider(

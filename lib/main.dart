@@ -1,4 +1,4 @@
-// main.dart
+﻿// main.dart
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'utils/firebase_init.dart';
@@ -23,7 +23,7 @@ void main() async {
 
   try {
     await initializeFirebase();
-    print('Firebase initialized successfully in main()');
+    debugPrint('Firebase initialized successfully in main()');
 
     // Initialize Remote Config
     remoteConfigService = RemoteConfigService();
@@ -35,13 +35,13 @@ void main() async {
       bool activated = await remoteConfigService.activate();
 
       if (activated) {
-        print('Remote config activated successfully');
-        print('App name from remote config: ${remoteConfigService.appName}');
+        debugPrint('Remote config activated successfully');
+        debugPrint('App name from remote config: ${remoteConfigService.appName}');
       } else {
-        print('Failed to activate remote config in main.dart ${remoteConfigService.appName}');
+        debugPrint('Failed to activate remote config in main.dart ${remoteConfigService.appName}');
       }
     } catch (e) {
-      print('Error with Remote Config: $e');
+      debugPrint('Error with Remote Config: $e');
       // Continue with default values
     }
 
@@ -54,8 +54,8 @@ void main() async {
 
     await UnityAds.init(
       gameId: await AppPref.loadSharedPrefString(Constant.UNITY_APP_APP_ID),
-      onComplete: () => print('Unity Ads initialization complete'),
-      onFailed: (error, message) => print('Unity Ads initialization failed: $error $message'),
+      onComplete: () => debugPrint('Unity Ads initialization complete'),
+      onFailed: (error, message) => debugPrint('Unity Ads initialization failed: $error $message'),
     );
 
     FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: true);
@@ -76,8 +76,8 @@ void main() async {
       ),
     );
   } catch (e, stackTrace) {
-    print('Error during initialization: $e');
-    print('Stack trace: $stackTrace');
+    debugPrint('Error during initialization: $e');
+    debugPrint('Stack trace: $stackTrace');
     // Handle the error, perhaps by showing an error screen
     runApp(ErrorApp(error: e.toString()));
   }
