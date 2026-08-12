@@ -2,6 +2,8 @@
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+import 'package:single_radio/di/radio_di.dart';
 import 'package:single_radio/infrastructure/services/firebase_init.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -47,6 +49,10 @@ void main() async {
     OneSignal.Debug.setAlertLevel(OSLogLevel.none);
     OneSignal.initialize(remoteConfigService.oneSignalId);
     OneSignal.Notifications.addPermissionObserver((permission) {});
+
+    // Installer convention: every composed SDK registers its repositories
+    // against their facades here, before runApp.
+    RadioSdkDependencies.register(GetIt.instance);
 
     MobileAds.instance.initialize();
 

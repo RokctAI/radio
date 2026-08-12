@@ -18,6 +18,10 @@ class Constant {
   // Set to false to disable ads
   static bool showADS = false;
 
+  // Selects mock repositories in the DI hook, so the app runs without
+  // reaching third-party artwork services.
+  static bool isDemo = false;
+
   static String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
 
   // radio_player only splits ICY titles on " - ". When a stream uses something

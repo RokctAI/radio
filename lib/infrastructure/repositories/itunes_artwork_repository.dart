@@ -1,12 +1,12 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
 import 'package:single_radio/app_constants.dart';
-import 'package:single_radio/domain/interface/artwork_repository.dart';
+import 'package:single_radio/domain/interface/artwork.dart';
 import 'package:single_radio/infrastructure/models/response/itunes_search_response.dart';
 
-class ItunesArtworkRepository implements ArtworkRepository {
+class ItunesArtworkRepository implements ArtworkRepositoryFacade {
   ItunesArtworkRepository({http.Client? client})
       : _client = client ?? http.Client();
 

@@ -1,4 +1,4 @@
-import 'package:single_radio/domain/interface/artwork_repository.dart';
+﻿import 'package:single_radio/domain/interface/artwork.dart';
 
 /// Tries each source in order and returns the first hit.
 ///
@@ -6,10 +6,10 @@ import 'package:single_radio/domain/interface/artwork_repository.dart';
 /// through to fetchSongImageFromOther on every failure path. Ordering is now
 /// data rather than control flow, so a source can be added, removed or
 /// reordered without touching the application layer.
-class ChainedArtworkRepository implements ArtworkRepository {
+class ChainedArtworkRepository implements ArtworkRepositoryFacade {
   const ChainedArtworkRepository(this._sources);
 
-  final List<ArtworkRepository> _sources;
+  final List<ArtworkRepositoryFacade> _sources;
 
   @override
   Future<String?> findArtwork({

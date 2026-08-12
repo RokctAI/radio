@@ -6,7 +6,7 @@ import 'package:volume_regulator/volume_regulator.dart';
 import 'package:single_radio/app_constants.dart';
 import 'package:single_radio/application/artwork/artwork_provider.dart';
 import 'package:single_radio/application/playback/playback_state.dart';
-import 'package:single_radio/domain/interface/artwork_repository.dart';
+import 'package:single_radio/domain/interface/artwork.dart';
 import 'package:single_radio/infrastructure/models/data/track_metadata.dart';
 import 'package:single_radio/infrastructure/services/interstitial_ad.dart';
 import 'package:single_radio/utils/app_pref.dart';
@@ -18,7 +18,7 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
   }
 
   final Ref _ref;
-  final ArtworkRepository _artworkRepository;
+  final ArtworkRepositoryFacade _artworkRepository;
 
   final RadioPlayer radioPlayer = RadioPlayer();
   final AdmobHelper admobHelper = AdmobHelper();

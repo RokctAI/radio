@@ -1,12 +1,12 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
 import 'package:single_radio/app_constants.dart';
-import 'package:single_radio/domain/interface/artwork_repository.dart';
+import 'package:single_radio/domain/interface/artwork.dart';
 import 'package:single_radio/infrastructure/models/response/deezer_search_response.dart';
 
-class DeezerArtworkRepository implements ArtworkRepository {
+class DeezerArtworkRepository implements ArtworkRepositoryFacade {
   DeezerArtworkRepository({http.Client? client})
       : _client = client ?? http.Client();
 
