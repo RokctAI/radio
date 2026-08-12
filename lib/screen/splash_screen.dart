@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../ads/open_ad_manager.dart';
-import '../ads/InterstitialAd.dart';
+import '../ads/interstitial_ad.dart';
 import '../notifier/theme_provider.dart';
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 import '../utils/app_layout.dart';
 import 'home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

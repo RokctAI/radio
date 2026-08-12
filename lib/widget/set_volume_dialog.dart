@@ -1,6 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../utils/ColorUtils.dart';
+import '../utils/color_utils.dart';
 import '../utils/app_layout.dart';
 
 class SetVolumeDialog extends StatelessWidget {

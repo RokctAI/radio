@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:radio_player/radio_player.dart';
 import 'package:volume_regulator/volume_regulator.dart';
 
-import '../ads/InterstitialAd.dart';
-import '../utils/Constant.dart';
+import '../ads/interstitial_ad.dart';
+import '../utils/constant.dart';
 import '../utils/app_pref.dart';
 import 'image_url_notifier.dart';
 import 'package:http/http.dart' as http;

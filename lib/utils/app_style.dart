@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 Color primary = const Color(0xFFFBFBFD);
 Color primaryDark = const Color(0xFF222631);
@@ -15,17 +15,17 @@ class Styles {
   static Color bottomLineColor = const Color(0xFFE3E4EA);
   static Color bottomLineColorDark = const Color(0xFF252833);
   static Color viewLineColor = const Color(0xFF8C94AC);
-  static Color track_tint = const Color(0xFFCDCECE);
-  static Color thumb_tint = const Color(0xFFC5C6C8);
-  static Color track_tint_actvie = const Color(0xFFC5C6C8);
-  static Color thumb_tint_actvie = const Color(0xFF191B23);
+  static Color trackTint = const Color(0xFFCDCECE);
+  static Color thumbTint = const Color(0xFFC5C6C8);
+  static Color trackTintActive = const Color(0xFFC5C6C8);
+  static Color thumbTintActive = const Color(0xFF191B23);
 
-  static Color track_tint_dark = const Color(0xFF2F323A);
-  static Color thumb_tint_dark = const Color(0xFF363A48);
-  static Color track_tint_actvie_dark = const Color(0xFF5C6172);
-  static Color thumb_tint_actvie_dark = const Color(0xFFC4C7D0);
+  static Color trackTintDark = const Color(0xFF2F323A);
+  static Color thumbTintDark = const Color(0xFF363A48);
+  static Color trackTintActiveDark = const Color(0xFF5C6172);
+  static Color thumbTintActiveDark = const Color(0xFFC4C7D0);
 
-  static Color gird_card_sec_text = const Color(0xFFC9CCD0);
+  static Color gridCardSecText = const Color(0xFFC9CCD0);
   static Color splashNameBlue = const Color(0xFF5FC8DF);
 
   static Color shimmerBaseLight = Colors.grey[300]!;

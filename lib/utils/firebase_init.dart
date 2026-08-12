@@ -1,7 +1,7 @@
 ﻿// firebase_init.dart
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'Constant.dart';
+import 'constant.dart';
 
 Future<void> initializeFirebase() async {
   try {

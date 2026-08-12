@@ -10,7 +10,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../ads/open_ad_manager.dart';
 import '../dialog/no_internet_dialog.dart';
 import '../notifier/radio_notifier.dart';
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 import '../utils/app_layout.dart';
 import '../utils/app_style.dart';
 import '../widget/blur_bg_widget.dart';

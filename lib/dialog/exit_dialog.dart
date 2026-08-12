@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../utils/ColorUtils.dart';
+import '../utils/color_utils.dart';
 import '../utils/app_layout.dart';
 
 class ExitDialog extends StatelessWidget {

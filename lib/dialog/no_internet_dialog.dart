@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-import '../utils/ColorUtils.dart';
+import '../utils/color_utils.dart';
 import '../utils/app_layout.dart';
 
 class NoInternetDialog extends StatelessWidget {

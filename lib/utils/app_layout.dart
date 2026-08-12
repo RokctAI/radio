@@ -1,9 +1,9 @@
-import 'dart:ui';
+﻿import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'ColorUtils.dart';
+import 'color_utils.dart';
 
 class AppLayout {
   /// WidgetsBinding.window is deprecated and slated for removal ahead of

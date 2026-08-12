@@ -1,4 +1,4 @@
-import 'package:back_button_behavior/back_button_behavior.dart';
+﻿import 'package:back_button_behavior/back_button_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -12,7 +12,7 @@ import '../ads/ads_callback.dart';
 import '../dialog/exit_dialog.dart';
 import '../notifier/image_url_notifier.dart';
 import '../notifier/radio_notifier.dart';
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 import '../utils/app_layout.dart';
 import '../widget/blur_bg_widget.dart';
 import '../widget/seek_bar.dart';
@@ -312,7 +312,7 @@ class RadioPlayerScreen extends StatelessWidget {
     if (radioModel.countAds == 0) {
       radioModel.admobHelper.showInterad(navigator.context);
       final result = await adsCheck.openAdsOnMessageEvent();
-      if (result.contains(Constant.DISMISS)) {
+      if (result.contains(Constant.dismiss)) {
         await radioModel.savedAds();
       }
     } else {

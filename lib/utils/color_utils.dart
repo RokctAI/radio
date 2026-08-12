@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '/utils/app_style.dart';
 import '/notifier/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -52,29 +52,29 @@ class ColorUtils {
   static Color getTrackColor(BuildContext context) {
     return Provider.of<ThemeProvider>(context, listen: false).currentTheme ==
             true
-        ? Styles.track_tint_dark
-        : Styles.track_tint;
+        ? Styles.trackTintDark
+        : Styles.trackTint;
   }
 
   static Color getThumbColor(BuildContext context) {
     return Provider.of<ThemeProvider>(context, listen: false).currentTheme ==
             true
-        ? Styles.thumb_tint_dark
-        : Styles.thumb_tint;
+        ? Styles.thumbTintDark
+        : Styles.thumbTint;
   }
 
   static Color getTrackColorActive(BuildContext context) {
     return Provider.of<ThemeProvider>(context, listen: false).currentTheme ==
             true
-        ? Styles.track_tint_actvie_dark
-        : Styles.track_tint_actvie;
+        ? Styles.trackTintActiveDark
+        : Styles.trackTintActive;
   }
 
   static Color getThumbColorActive(BuildContext context) {
     return Provider.of<ThemeProvider>(context, listen: false).currentTheme ==
             true
-        ? Styles.thumb_tint_actvie_dark
-        : Styles.thumb_tint_actvie;
+        ? Styles.thumbTintActiveDark
+        : Styles.thumbTintActive;
   }
 
   static Color getLineColor(BuildContext context) {

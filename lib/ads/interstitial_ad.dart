@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 import '../utils/app_style.dart';
 import 'ads_callback.dart';
 import 'package:facebook_audience_network/ad/ad_banner.dart' as fb;
@@ -20,17 +20,17 @@ String adsType = '';
 class AdmobHelper {
   static bool isBannerLoaded = false;
   initialization() async {
-    adsType = Constant.ADSKEY;
+    adsType = Constant.adsKey;
 
     if (adsType.contains("0")) {
-      interCode = Platform.isIOS?Constant.INTER_ADS_IOS:Constant.INTER_ADS;
-      bannerCode = Platform.isIOS?Constant.BANNER_ADS_IOS:Constant.BANNER_ADS;
+      interCode = Platform.isIOS?Constant.interAdsIos:Constant.interAds;
+      bannerCode = Platform.isIOS?Constant.bannerAdsIos:Constant.bannerAds;
       createInterad();
     } else if (adsType.contains("2")) {
       loadUnityIntAd();
     } else if (adsType.contains("1")) {
-      interCode = Platform.isIOS?Constant.FBINTERS_ID_IOS:Constant.FBINTERS_ID;
-      bannerCode = Platform.isIOS?Constant.FBBANNER_ID_IOS:Constant.FBBANNER_ID;
+      interCode = Platform.isIOS?Constant.fbInterstitialIdIos:Constant.fbInterstitialId;
+      bannerCode = Platform.isIOS?Constant.fbBannerIdIos:Constant.fbBannerId;
       loadfbInterstitialAd();
     }
   }
@@ -80,7 +80,7 @@ class AdmobHelper {
 
   static Future<void> loadUnityIntAd() async {
     await UnityAds.load(
-      placementId: Platform.isIOS?Constant.UNITY_INTER_PLACEMENT_ID_IOS:Constant.UNITY_INTER_PLACEMENT_ID,
+      placementId: Platform.isIOS?Constant.unityInterPlacementIdIos:Constant.unityInterPlacementId,
       onComplete: (placementId) => debugPrint('Load Complete $placementId'),
       onFailed: (placementId, error, message) =>
           debugPrint('Load Failed $placementId: $error $message'),
@@ -89,7 +89,7 @@ class AdmobHelper {
 
   static Future<void> showIntAd() async {
     UnityAds.showVideoAd(
-        placementId: Platform.isIOS?Constant.UNITY_INTER_PLACEMENT_ID_IOS:Constant.UNITY_INTER_PLACEMENT_ID,
+        placementId: Platform.isIOS?Constant.unityInterPlacementIdIos:Constant.unityInterPlacementId,
         onStart: (placementId) => debugPrint('Video Ad $placementId started'),
         onClick: (placementId) => debugPrint('Video Ad $placementId click'),
         onSkipped: (placementId) => debugPrint('Video Ad $placementId skipped'),

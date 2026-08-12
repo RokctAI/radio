@@ -13,7 +13,7 @@ import 'notifier/radio_notifier.dart';
 import 'notifier/theme_provider.dart';
 import 'notifier/timer_notifier.dart';
 import 'screen/splash_screen.dart';
-import 'utils/Constant.dart';
+import 'utils/constant.dart';
 import 'utils/app_pref.dart';
 
 void main() async {
@@ -53,7 +53,7 @@ void main() async {
     MobileAds.instance.initialize();
 
     await UnityAds.init(
-      gameId: await AppPref.loadSharedPrefString(Constant.UNITY_APP_APP_ID),
+      gameId: await AppPref.loadSharedPrefString(Constant.unityAppId),
       onComplete: () => debugPrint('Unity Ads initialization complete'),
       onFailed: (error, message) => debugPrint('Unity Ads initialization failed: $error $message'),
     );

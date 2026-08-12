@@ -1,7 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:remixicon/remixicon.dart';
 
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 import 'animated_stand_widget.dart';
 import '../utils/app_layout.dart';
 

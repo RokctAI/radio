@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../utils/Constant.dart';
+import '../utils/constant.dart';
 
 class AppOpenAdManager {
   AppOpenAd? _appOpenAd;
@@ -12,7 +12,7 @@ class AppOpenAdManager {
   static String adsType = '';
 
   void loadAd() async {
-    adsType = Constant.ADSKEY;
+    adsType = Constant.adsKey;
     if (adsType.contains("0")) {
       AppOpenAd.load(
         adUnitId: Platform.isIOS?Constant.openAdsIos:Constant.openAds,

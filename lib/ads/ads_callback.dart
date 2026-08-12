@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import '../utils/Constant.dart';
+﻿import 'package:flutter/cupertino.dart';
+import '../utils/constant.dart';
 
 class AdsCallBack extends ChangeNotifier {
   bool dismiss = false;
@@ -18,9 +18,9 @@ class AdsCallBack extends ChangeNotifier {
   Future<String> openAdsOnMessageEvent() async {
     String finalResult = '';
     if (dismiss) {
-      finalResult = Constant.DISMISS;
+      finalResult = Constant.dismiss;
     } else {
-      finalResult = Constant.FAILED;
+      finalResult = Constant.failed;
     }
     return finalResult;
   }

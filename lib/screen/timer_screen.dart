@@ -2,7 +2,7 @@
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import '../../utils/duration_extension.dart';
-import '../ads/InterstitialAd.dart';
+import '../ads/interstitial_ad.dart';
 import '../notifier/timer_notifier.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:remixicon/remixicon.dart';

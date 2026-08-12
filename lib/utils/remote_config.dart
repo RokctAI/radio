@@ -1,7 +1,7 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
+﻿import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 
-import 'Constant.dart';
+import 'constant.dart';
 
 
 class RemoteConfigService {
@@ -23,15 +23,7 @@ class RemoteConfigService {
         minimumFetchInterval: Duration.zero,  // This allows fetching each time
       ));
       if (kDebugMode) {
-        if (kDebugMode) {
-          if (kDebugMode) {
-            if (kDebugMode) {
-              if (kDebugMode) {
-                print('Remote Config initialized successfully  in remote_config.dart');
-              }
-            }
-          }
-        }
+        print('Remote Config initialized successfully in remote_config.dart');
       }
     } catch (e) {
       if (kDebugMode) {

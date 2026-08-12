@@ -1,4 +1,4 @@
-
+﻿
 class Constant {
   static String appName = 'Musina FM';
   static String appMotto = 'Can you handle the Heat?';
@@ -43,46 +43,46 @@ class Constant {
 
 
   // Admob ads Code & Id For Android
-  static const String AdmobAppId = 'ca-app-pub-3940256099942544~3347511713';
+  static const String admobAppId = 'ca-app-pub-3940256099942544~3347511713';
   static const String openAds = "ca-app-pub-3940256099942544/3419835294";
-  static const String BANNER_ADS = "ca-app-pub-3940256099942544/6300978111";
-  static const String INTER_ADS = "ca-app-pub-3940256099942544/1033173712";
+  static const String bannerAds = "ca-app-pub-3940256099942544/6300978111";
+  static const String interAds = "ca-app-pub-3940256099942544/1033173712";
 
   //Unity App Id & Placement For Android
-  static const String UNITY_APP_APP_ID = "5090247";
-  static const String UNITY_INTER_PLACEMENT_ID = "Interstitial_Android";
-  static const String UNITY_BANNER_PLACEMENT_ID = "Banner_Android";
+  static const String unityAppId = "5090247";
+  static const String unityInterPlacementId = "Interstitial_Android";
+  static const String unityBannerPlacementId = "Banner_Android";
 
   //facebook ads code For Android
-  static const String FBBANNER_ID = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
-  static const String FBINTERS_ID = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
+  static const String fbBannerId = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
+  static const String fbInterstitialId = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
 
   //Admob ads code & Id for IOS
   static const String openAdsIos = "ca-app-pub-3940256099942544/5662855259";
-  static const String INTER_ADS_IOS = "ca-app-pub-3940256099942544/4411468910";
-  static const String BANNER_ADS_IOS = "ca-app-pub-3940256099942544/2934735716";
+  static const String interAdsIos = "ca-app-pub-3940256099942544/4411468910";
+  static const String bannerAdsIos = "ca-app-pub-3940256099942544/2934735716";
 
   //Unity Placement for IOS
-  static const String UNITY_INTER_PLACEMENT_ID_IOS = "Interstitial_Ios";
-  static const String UNITY_BANNER_PLACEMENT_ID_IOS = "Banner_Ios";
+  static const String unityInterPlacementIdIos = "Interstitial_Ios";
+  static const String unityBannerPlacementIdIos = "Banner_Ios";
 
   //Facebook Placement for IOS
-  static const String FBBANNER_ID_IOS = "fbbanner_id_ios";
-  static const String FBINTERS_ID_IOS= "fbinters_id_ios";
+  static const String fbBannerIdIos = "fbbanner_id_ios";
+  static const String fbInterstitialIdIos= "fbinters_id_ios";
 
   //if you want to show Admob ads need to
-  // set ADSKEY "0"
+  // set adsKey "0"
   // if facebook ads "1"
   // else Unity ads "2"
-  static String ADSKEY = "3";
+  static String adsKey = "3";
 
   //After showing an ad, how many clicks will show another ad?
-  static const int Ads_Interval = 1;
+  static const int adsIntervalClicks = 1;
 
   //Unchanged below lines
-  static const String DISMISS = "1";
-  static const String FAILED = "0";
-  static const String MYPREFERENCE = "mypref";
+  static const String dismiss = "1";
+  static const String failed = "0";
+  static const String myPreference = "mypref";
   static const String adsInterval = "ads_interval";
 
 }
