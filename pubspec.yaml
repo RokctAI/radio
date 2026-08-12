@@ -33,7 +33,6 @@ dependencies:
   facebook_audience_network: ^1.0.1
   flutter_slider_drawer: ^2.1.3
   text_scroll: ^0.2.0
-  back_button_behavior: ^0.0.2
   url_launcher: ^6.3.1
   onesignal_flutter: ^5.2.7
   blur: ^4.0.0

@@ -1,5 +1,4 @@
-﻿import 'package:back_button_behavior/back_button_behavior.dart';
-import 'package:auto_route/auto_route.dart';
+﻿import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +14,7 @@ import 'package:single_radio/application/artwork/artwork_provider.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/exit_dialog.dart';
 import 'package:single_radio/application/playback/playback_provider.dart';
 import 'package:single_radio/app_constants.dart';
+import 'package:single_radio/infrastructure/services/app_background.dart';
 import 'package:single_radio/utils/app_layout.dart';
 import 'package:single_radio/presentation/component/blurred_background.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/seek_bar.dart';
@@ -79,7 +79,7 @@ class RadioPlayerPage extends ConsumerWidget {
         } else if (wasPlaying) {
           // "Background" -- keep playing, drop the app to the launcher.
           playback.markBackButtonPressed();
-          await BackButtonMethods.minimize();
+          await AppBackground.minimize();
         }
       },
       child: GestureDetector(
