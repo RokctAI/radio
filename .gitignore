@@ -40,3 +40,5 @@ updated_files.txt
 updated_files.zip
 /scripts/gethashes.txt
 /scripts/manual.txt
+
+pubspec.lock
