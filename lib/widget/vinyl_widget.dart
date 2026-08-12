@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:remixicon/remixicon.dart';
 
 import '../utils/Constant.dart';
@@ -51,20 +50,6 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Stack(
       children: [
-      /*Positioned(
-      right: 45, // Adjust the position as needed
-      //top: AppLayout.getScreenWidth() / 3,  // Adjust the position as needed
-     top: 43,  // Adjust the position as needed
-
-       // child: ClipRRect(
-          //borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            'assets/images/logo2.png',
-            height: 35,
-            width: 35,
-          ),
-       // ),
-      ),*/
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
@@ -74,38 +59,17 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
             ),
             child: Stack(
               children: [
+                // Platter behind the record. 0.17 is the two stacked 0.09
+                // layers this replaces, composited.
                 Positioned(
-                  left: -16, // Adjust the position as needed
-                  //top: AppLayout.getScreenWidth() / 3,  // Adjust the position as needed
-                  bottom: -16,  // Adjust the position as needed
+                  left: -16,
+                  bottom: -16,
                   child: Icon(
-                    Remix.circle_fill, // Replace with the specific Remix icon
-                    color: Colors.white.withOpacity(0.09),
+                    Remix.circle_fill,
+                    color: Colors.white.withOpacity(0.17),
                     size: 290,
                   ),
                 ),
-                Positioned(
-                  left: -16, // Adjust the position as needed
-                  //top: AppLayout.getScreenWidth() / 3,  // Adjust the position as needed
-                  bottom: -16,  // Adjust the position as needed
-                  child: Icon(
-                    Remix.circle_fill, // Replace with the specific Remix icon
-                    color: Colors.white.withOpacity(0.09),
-                    size: 290,
-                  ),
-                ),
-                // Add the SVG behind the color
-             /*   Positioned(
-                  left: 13,
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: SvgPicture.asset(
-                    'assets/images/device.svg',
-                    //fit: BoxFit.cover,
-                    fit: BoxFit.fitWidth,
-                  ),
-                ), */
                 RotationTransition(
                   turns: _animationController,
                   child: Container(
@@ -133,27 +97,27 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
             isPlaying: widget.isPlaying,
           ),
         ),
+        // Deck knobs.
         Positioned(
-          left: 50, // Adjust the position as needed
-          top: 50,  // Adjust the position as needed
+          left: 50,
+          top: 50,
           child: Container(
-            decoration:  BoxDecoration(
-             // color: Colors.white30,
-              //shape: BoxShape.circle,
-             border: Border.all(
-               color: Colors.white30,
-               width: 4.0, ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.white30,
+                width: 4.0,
+              ),
             ),
             child: const Icon(
-              Remix.square_fill, // Replace with the specific Remix icon
+              Remix.square_fill,
               color: Colors.black45,
               size: 15,
             ),
           ),
         ),
         Positioned(
-          left: 52, // Adjust the position as needed
-          bottom: 42,  // Adjust the position as needed
+          left: 52,
+          bottom: 42,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.grey,
@@ -162,17 +126,9 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
                 color: Colors.white30,
                 width: 3.0,
               ),
-              /*boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 10,
-                  offset: const Offset(0, 5), // Adjust the shadow position
-                ),
-              ],*/
             ),
-            child: Icon(widget.isPlaying ?
-            Remix.edit_circle_fill : Remix.shut_down_fill, // Replace with the specific Remix icon
+            child: Icon(
+              widget.isPlaying ? Remix.edit_circle_fill : Remix.shut_down_fill,
               color: Colors.black54,
               size: 20,
             ),
