@@ -42,3 +42,7 @@ updated_files.zip
 /scripts/manual.txt
 
 pubspec.lock
+
+# freezed / json_serializable output
+*.freezed.dart
+*.g.dart

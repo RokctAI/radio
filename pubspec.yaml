@@ -1,4 +1,4 @@
-name: single_radio
+﻿name: single_radio
 description: "Flutter Single Radio."
 
 publish_to: 'none'
@@ -22,7 +22,6 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_svg: ^2.0.14
   http: ^1.2.2
-  provider: ^6.1.2
   shared_preferences: ^2.3.4
   sleek_circular_slider: ^2.0.1
   radio_player: ^1.7.0

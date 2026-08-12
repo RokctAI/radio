@@ -1,20 +1,18 @@
 ﻿// main.dart
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:single_radio/config/firebase_init.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:single_radio/infrastructure/services/firebase_init.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
-import 'package:single_radio/config/remote_config.dart';
-import 'package:single_radio/ads/application/callback/ads_callback.dart';
-import 'package:single_radio/radio/application/artwork/artwork_notifier.dart';
-import 'package:single_radio/radio/application/playback/playback_notifier.dart';
-import 'package:single_radio/core/application/theme/theme_provider.dart';
-import 'package:single_radio/sleep_timer/application/timer/timer_notifier.dart';
-import 'package:single_radio/core/presentation/pages/splash/splash_page.dart';
-import 'package:single_radio/config/constant.dart';
-import 'package:single_radio/core/utils/app_pref.dart';
+import 'package:single_radio/infrastructure/services/remote_config.dart';
+import 'package:single_radio/infrastructure/services/remote_config_provider.dart';
+import 'package:single_radio/application/theme/theme_provider.dart';
+import 'package:single_radio/presentation/pages/splash/splash_page.dart';
+import 'package:single_radio/app_constants.dart';
+import 'package:single_radio/utils/app_pref.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,17 +58,10 @@ void main() async {
 
     FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: true);
 
-    late final radiomodel = PlaybackNotifier();
-
     runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => ThemeProvider()..initialize()),
-          ChangeNotifierProvider(create: (context) => ArtworkNotifier()),
-          ChangeNotifierProvider(create: (context) => AdsCallBack()),
-          ChangeNotifierProvider<PlaybackNotifier>.value(value: radiomodel),
-          ChangeNotifierProvider(create: (context) => TimerNotifier(onTimer: radiomodel.pause)),
-          Provider<RemoteConfigService>.value(value: remoteConfigService),
+      ProviderScope(
+        overrides: [
+          remoteConfigProvider.overrideWithValue(remoteConfigService),
         ],
         child: const MyApp(),
       ),
@@ -83,18 +74,17 @@ void main() async {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-      return MaterialApp(
-        theme: themeProvider.currentTheme ? MyThemes.darkTheme : MyThemes.lightTheme,
-        home: const SplashScreen(),
-        debugShowCheckedModeBanner: false,
-      );
-    });
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = ref.watch(themeProvider).isDark;
+    return MaterialApp(
+      theme: isDark ? MyThemes.darkTheme : MyThemes.lightTheme,
+      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
