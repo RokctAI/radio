@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:remixicon/remixicon.dart';
 
 import 'package:single_radio/app_constants.dart';
@@ -55,7 +56,7 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.white30,
+              color: AppStyle.strokeSubtle,
             ),
             child: Stack(
               children: [
@@ -66,7 +67,7 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
                   bottom: -16,
                   child: Icon(
                     Remix.circle_fill,
-                    color: Colors.white.withValues(alpha: 0.17),
+                    color: AppStyle.whiteAlpha(0.17),
                     size: 290,
                   ),
                 ),
@@ -104,13 +105,13 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.white30,
+                color: AppStyle.strokeSubtle,
                 width: 4.0,
               ),
             ),
             child: const Icon(
               Remix.square_fill,
-              color: Colors.black45,
+              color: AppStyle.scrim,
               size: 15,
             ),
           ),
@@ -120,16 +121,16 @@ class _VinylPlayerState extends State<VinylPlayer> with SingleTickerProviderStat
           bottom: 42,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: AppStyle.textGrey,
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white30,
+                color: AppStyle.strokeSubtle,
                 width: 3.0,
               ),
             ),
             child: Icon(
               widget.isPlaying ? Remix.edit_circle_fill : Remix.shut_down_fill,
-              color: Colors.black54,
+              color: AppStyle.inkMuted,
               size: 20,
             ),
           ),

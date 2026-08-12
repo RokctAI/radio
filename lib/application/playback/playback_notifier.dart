@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radio_player/radio_player.dart';
 import 'package:volume_regulator/volume_regulator.dart';
@@ -22,15 +22,6 @@ class PlaybackNotifier extends StateNotifier<PlaybackState> {
 
   final RadioPlayer radioPlayer = RadioPlayer();
   final AdmobHelper admobHelper = AdmobHelper();
-
-  /// Visualiser bar styling. Presentation constants rather than state.
-  static final List<Color> barColors = [
-    Colors.white.withValues(alpha: 0.5),
-    Colors.white.withValues(alpha: 0.5),
-    Colors.white.withValues(alpha: 0.5),
-    Colors.white.withValues(alpha: 0.5),
-  ];
-  static const List<int> barDurations = [900, 700, 600, 800, 500];
 
   int countAds = 0;
 

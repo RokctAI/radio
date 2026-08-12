@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +31,7 @@ class CountDownTimer extends ConsumerWidget {
                     height: AppLayout.getHeight(40),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(13)),
-                      color: Colors.white12,
+                      color: AppStyle.surfaceOverlayAlt,
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +41,7 @@ class CountDownTimer extends ConsumerWidget {
                           viewModel.remaining.format(),
                           style: const TextStyle(
                             fontSize: 24.0,
-                            color: Colors.white,
+                            color: AppStyle.white,
                             fontFamily: 'ClashGrotesk',
                             fontWeight: FontWeight.w400,
                           ),
@@ -52,9 +53,9 @@ class CountDownTimer extends ConsumerWidget {
                     SliderTheme(
                       data: SliderThemeData(
                         trackHeight: 4.0,
-                        overlayColor: Colors.transparent,
-                        activeTrackColor: Colors.white.withValues(alpha: .75),
-                        inactiveTrackColor: Colors.white.withValues(alpha: .35),
+                        overlayColor: AppStyle.transparent,
+                        activeTrackColor: AppStyle.whiteAlpha(.75),
+                        inactiveTrackColor: AppStyle.whiteAlpha(.35),
                         thumbShape: SliderComponentShape.noThumb,
                       ),
                       child: Slider(
@@ -69,7 +70,7 @@ class CountDownTimer extends ConsumerWidget {
                       },
                       child: const Icon(
                         Remix.close_line, // Replace with the specific Remix icon
-                        color: Colors.white,
+                        color: AppStyle.white,
                        // size: 290,
                       )
                   )],
@@ -81,7 +82,7 @@ class CountDownTimer extends ConsumerWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(29)),
-                    color: Colors.white12,
+                    color: AppStyle.surfaceOverlayAlt,
                   ),
                   padding: EdgeInsets.symmetric(
                       horizontal: AppLayout.getWidth(13),
@@ -91,7 +92,7 @@ class CountDownTimer extends ConsumerWidget {
                     children: [
                       const Icon(
                         Remix.timer_line, // Replace with the specific Remix icon
-                        color: Colors.white,
+                        color: AppStyle.white,
                         //size: 290,
                       ),
                       Gap(AppLayout.getWidth(10)),
@@ -99,7 +100,7 @@ class CountDownTimer extends ConsumerWidget {
                         'Set Timer',
                         style: TextStyle(
                           fontSize: 18.0,
-                          color: Colors.white,
+                          color: AppStyle.white,
                           fontFamily: 'ClashGrotesk',
                           fontWeight: FontWeight.w500,
                         ),

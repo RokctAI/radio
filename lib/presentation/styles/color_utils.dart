@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:single_radio/presentation/styles/app_style.dart';
 
 class ColorUtils {
@@ -80,19 +81,19 @@ class ColorUtils {
 
   static Color getBlackWhite(BuildContext context) {
     return _isDark(context)
-        ? Colors.white
-        : Colors.black;
+        ? AppStyle.white
+        : AppStyle.black;
   }
 
   static Color getBlackWhiteReverse(BuildContext context) {
     return _isDark(context)
-        ? Colors.black
-        : Colors.white;
+        ? AppStyle.black
+        : AppStyle.white;
   }
 
   static Color getSplashName(BuildContext context) {
     return _isDark(context)
-        ? Colors.white
+        ? AppStyle.white
         : Styles.splashNameBlue;
   }
 

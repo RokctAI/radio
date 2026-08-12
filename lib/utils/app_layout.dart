@@ -1,6 +1,7 @@
 ﻿import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter/services.dart';
 
 import 'package:single_radio/presentation/styles/color_utils.dart';
@@ -39,7 +40,7 @@ class AppLayout {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    systemStatusColor(colors:Colors.transparent);
+    systemStatusColor(colors:AppStyle.transparent);
   }
 
   static screenPortrait1() {
@@ -49,7 +50,7 @@ class AppLayout {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    systemStatusColor(colors:Colors.transparent);
+    systemStatusColor(colors:AppStyle.transparent);
   }
 
   static screenLandscape() {

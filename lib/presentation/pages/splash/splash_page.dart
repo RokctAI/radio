@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:single_radio/infrastructure/services/open_ad_manager.dart';
 import 'package:single_radio/infrastructure/services/interstitial_ad.dart';
 import 'package:single_radio/app_constants.dart';
@@ -152,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                       fontSize: 16,
                      // color: Color(0xFFFF6600),
-                      color: Colors.white,
+                      color: AppStyle.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

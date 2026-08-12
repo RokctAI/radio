@@ -1,6 +1,7 @@
 ﻿import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:gap/gap.dart';
 
 import 'package:single_radio/presentation/styles/color_utils.dart';
@@ -13,18 +14,18 @@ class ExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white.withValues(alpha: .08),
-      surfaceTintColor: Colors.transparent,
+      backgroundColor: AppStyle.whiteAlpha(.08),
+      surfaceTintColor: AppStyle.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: .08),
+          color: AppStyle.whiteAlpha(.08),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Colors.white.withValues(alpha: .15)
+            color: AppStyle.whiteAlpha(.15)
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
+              color: AppStyle.blackAlpha(0.15),
               blurRadius: 30.0,
               offset: const Offset(0.0, 20.0),
             ),
@@ -52,7 +53,7 @@ class ExitDialog extends StatelessWidget {
                   Divider(
                     height: 1,
                     thickness: 1,
-                    color: Colors.white.withValues(alpha: .4),
+                    color: AppStyle.whiteAlpha(.4),
                   ),
                   Gap(AppLayout.getHeight(20)),
                   Padding(
@@ -64,7 +65,7 @@ class ExitDialog extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'ClashGrotesk',
-                        color: Colors.white,
+                        color: AppStyle.white,
                       ),
                     ),
                   ),
@@ -77,7 +78,7 @@ class ExitDialog extends StatelessWidget {
                           Navigator.of(context).pop( isNotPlaying??false?false:true);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white.withValues(alpha: .15),
+                          backgroundColor: AppStyle.whiteAlpha(.15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -90,7 +91,7 @@ class ExitDialog extends StatelessWidget {
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'ClashGrotesk',
-                            color: Colors.white,
+                            color: AppStyle.white,
                           ),
                         ),
                       ),
@@ -100,7 +101,7 @@ class ExitDialog extends StatelessWidget {
                           Navigator.of(context).pop( isNotPlaying??false?true:false);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor: AppStyle.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),

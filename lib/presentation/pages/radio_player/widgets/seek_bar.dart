@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 
 class VerticalSeekBar extends StatefulWidget {
   final Color thumbColor;
@@ -40,7 +41,7 @@ class _VerticalSeekBarState extends State<VerticalSeekBar> {
           thumbRadius: 18,
         ),
         thumbColor: widget.thumbColor,
-        overlayColor: Colors.transparent,
+        overlayColor: AppStyle.transparent,
         activeTrackColor: widget.progressColor,
         inactiveTrackColor: widget.backgroundColor,
       ),
@@ -96,10 +97,10 @@ class CustomSliderThumbShape extends SliderComponentShape {
     final Offset thumbCenter = center.translate(0, thumbRadius - outerThumbRadius);
 
     final Paint paint = Paint();
-    paint.color = Colors.white38;
+    paint.color = AppStyle.trackInactive;
     canvas.drawCircle(thumbCenter, outerThumbRadius, paint);
 
-    paint.color = Colors.white; // Set color for the inner circle
+    paint.color = AppStyle.white; // Set color for the inner circle
     canvas.drawCircle(thumbCenter, innerThumbRadius, paint);
   }
 }
@@ -155,7 +156,7 @@ class CustomSliderTrackShape extends SliderTrackShape {
     final canvas = context.canvas;
 
     final Paint paint = Paint()
-      ..color = Colors.white38
+      ..color = AppStyle.trackInactive
       ..strokeCap = StrokeCap.round
       ..strokeWidth = trackHeight;
 

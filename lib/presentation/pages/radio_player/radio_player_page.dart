@@ -1,5 +1,6 @@
 ﻿import 'package:back_button_behavior/back_button_behavior.dart';
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:music_visualizer/music_visualizer.dart';
@@ -10,7 +11,6 @@ import 'package:text_scroll/text_scroll.dart';
 
 import 'package:single_radio/application/ads/ads_provider.dart';
 import 'package:single_radio/application/artwork/artwork_provider.dart';
-import 'package:single_radio/application/playback/playback_notifier.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/exit_dialog.dart';
 import 'package:single_radio/application/playback/playback_provider.dart';
 import 'package:single_radio/app_constants.dart';
@@ -19,6 +19,16 @@ import 'package:single_radio/presentation/component/blurred_background.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/seek_bar.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/vinyl_player.dart';
 import 'package:single_radio/presentation/pages/timer/timer_page.dart';
+
+/// Visualiser bar styling. Presentation data, so it lives with the page
+/// rather than on the notifier -- application must not import presentation.
+final List<Color> _barColors = [
+  AppStyle.whiteAlpha(0.5),
+  AppStyle.whiteAlpha(0.5),
+  AppStyle.whiteAlpha(0.5),
+  AppStyle.whiteAlpha(0.5),
+];
+const List<int> _barDurations = [900, 700, 600, 800, 500];
 
 class RadioPlayerScreen extends ConsumerWidget {
   final Function() onOpenSlider;
@@ -53,7 +63,7 @@ class RadioPlayerScreen extends ConsumerWidget {
         // stay nullable -- reading it as a plain bool threw.
         final exitConfirmed = await showDialog<bool>(
           context: context,
-          barrierColor: Colors.black.withValues(alpha: .5),
+          barrierColor: AppStyle.blackAlpha(.5),
           builder: (BuildContext dialogContext) {
             return ExitDialog(isNotPlaying: !wasPlaying);
           },
@@ -89,16 +99,16 @@ class RadioPlayerScreen extends ConsumerWidget {
                       child: isOpen
                           ? const Row(
                         children: [
-                          Icon(Remix.arrow_left_line, color: Colors.white, size: 30),
+                          Icon(Remix.arrow_left_line, color: AppStyle.white, size: 30),
                           SizedBox(width: 10),
-                          Text("Back", style: TextStyle(color: Colors.white)),
+                          Text("Back", style: TextStyle(color: AppStyle.white)),
                         ],
                       )
                           : const Row(
                         children: [
-                          Icon(Remix.menu_fill, color: Colors.white, size: 30),
+                          Icon(Remix.menu_fill, color: AppStyle.white, size: 30),
                           SizedBox(width: 10),
-                          Text("Menu", style: TextStyle(color: Colors.white)),
+                          Text("Menu", style: TextStyle(color: AppStyle.white)),
                         ],
                       ),
                     ),
@@ -175,8 +185,8 @@ class RadioPlayerScreen extends ConsumerWidget {
                               duration: const Duration(milliseconds: 300),
                               child: MusicVisualizer(
                                 barCount: 30,
-                                colors: PlaybackNotifier.barColors,
-                                duration: PlaybackNotifier.barDurations,
+                                colors: _barColors,
+                                duration: _barDurations,
                               ),
                             ),
                           ),
@@ -192,7 +202,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                                 pauseBetween: const Duration(seconds: 2),
                                 style: const TextStyle(
                                   fontSize: 34.0,
-                                  color: Colors.white,
+                                  color: AppStyle.white,
                                   fontFamily: 'ClashGrotesk',
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -205,7 +215,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                                 pauseBetween: const Duration(seconds: 2),
                                 style: const TextStyle(
                                   fontSize: 16.0,
-                                  color: Colors.white,
+                                  color: AppStyle.white,
                                   fontFamily: 'ClashGrotesk',
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -231,7 +241,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                         Container(
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(18)),
-                            color: Colors.white10,
+                            color: AppStyle.surfaceOverlay,
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: AppLayout.getWidth(18),
@@ -245,7 +255,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                                 onTap: () => _toggleVolume(ref),
                                 child: Icon(
                                   _getVolumeIcon(radioModel.volume),
-                                  color: Colors.white,
+                                  color: AppStyle.white,
                                   size: 35.0,
                                 ),
                               ),
@@ -256,10 +266,10 @@ class RadioPlayerScreen extends ConsumerWidget {
                                     thumbShape: CustomSliderThumbShape(
                                       thumbRadius: 18,
                                     ),
-                                    thumbColor: Colors.white,
-                                    overlayColor: Colors.transparent,
-                                    activeTrackColor: Colors.white38,
-                                    inactiveTrackColor: Colors.white38,
+                                    thumbColor: AppStyle.white,
+                                    overlayColor: AppStyle.transparent,
+                                    activeTrackColor: AppStyle.trackInactive,
+                                    inactiveTrackColor: AppStyle.trackInactive,
                                   ),
                                   child: Slider(
                                     value: radioModel.volume,
@@ -276,7 +286,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                                 onPressed: playback.togglePlayer,
                                 icon: Icon(
                                   radioModel.isPlaying ? Remix.pause_circle_fill : Remix.play_circle_fill,
-                                  color: radioModel.isPlaying ? Colors.grey : Colors.white,
+                                  color: radioModel.isPlaying ? AppStyle.textGrey : AppStyle.white,
                                   size: 48.0,
                                 ),
                                 padding: EdgeInsets.zero,

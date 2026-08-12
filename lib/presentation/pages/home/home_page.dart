@@ -1,6 +1,7 @@
 ﻿import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -154,7 +155,7 @@ class _SliderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      color: Colors.transparent,
+      color: AppStyle.transparent,
       child: Column(
         children: [
           Padding(

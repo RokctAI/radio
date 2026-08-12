@@ -1,5 +1,6 @@
 ﻿
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -13,7 +14,7 @@ class NoInternetDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppStyle.transparent,
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(

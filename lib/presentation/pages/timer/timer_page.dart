@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:single_radio/utils/duration_extension.dart';
@@ -43,9 +44,9 @@ class _TimerViewState extends ConsumerState<TimerView> {
                      // child: SvgPicture.asset('assets/images/back_arrow.svg'),
                       child: Row(  // Use a Row to display icon and text together
                         children: [
-                          Icon(Remix.arrow_left_line, color: Colors.white, size: 30),
+                          Icon(Remix.arrow_left_line, color: AppStyle.white, size: 30),
                           SizedBox(width: 10), // Add spacing between icon and text
-                          Text("Back", style: TextStyle(color: Colors.white)),
+                          Text("Back", style: TextStyle(color: AppStyle.white)),
                         ],
                       ),
 
@@ -59,7 +60,7 @@ class _TimerViewState extends ConsumerState<TimerView> {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(AppLayout.getHeight(200)),
-                        color: Colors.white,
+                        color: AppStyle.white,
                       ),
                       child: const _CircularSlider()),
                   Gap(AppLayout.getHeight(70)),
@@ -82,7 +83,7 @@ class _TimerViewState extends ConsumerState<TimerView> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15.0,
-                      color: Colors.white,
+                      color: AppStyle.white,
                       fontFamily: 'ClashGrotesk',
                       fontWeight: FontWeight.w400,
                     ),
@@ -163,7 +164,7 @@ class _TimeLeft extends StatelessWidget {
               hour,
               style: const TextStyle(
                 fontSize: 40.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),
@@ -173,7 +174,7 @@ class _TimeLeft extends StatelessWidget {
               'hr',
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),
@@ -187,7 +188,7 @@ class _TimeLeft extends StatelessWidget {
               ' : ',
               style: TextStyle(
                 fontSize: 40.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),
@@ -197,7 +198,7 @@ class _TimeLeft extends StatelessWidget {
               ' ',
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),
@@ -211,7 +212,7 @@ class _TimeLeft extends StatelessWidget {
               min,
               style: const TextStyle(
                 fontSize: 40.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),
@@ -221,7 +222,7 @@ class _TimeLeft extends StatelessWidget {
               'min',
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.black,
+                color: AppStyle.black,
                 fontFamily: 'ClashGrotesk',
                 fontWeight: FontWeight.w500,
               ),

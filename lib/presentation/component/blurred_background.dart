@@ -1,5 +1,6 @@
 ﻿import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
+import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:single_radio/application/artwork/artwork_provider.dart';
@@ -25,7 +26,7 @@ class BlurredBackgroundWithImage extends ConsumerWidget {
                   fit: BoxFit.fill,
                 ).blurred(
                   blur: 40,
-                  blurColor: Colors.black,
+                  blurColor: AppStyle.black,
                   colorOpacity: .5,
                 ),
               )
@@ -39,7 +40,7 @@ class BlurredBackgroundWithImage extends ConsumerWidget {
                             ))
                         .blurred(
                       blur: 40,
-                      blurColor: Colors.black,
+                      blurColor: AppStyle.black,
                       colorOpacity: .5,
                     ),
                   ),

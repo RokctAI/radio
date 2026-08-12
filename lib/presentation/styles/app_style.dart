@@ -28,9 +28,9 @@ class Styles {
   static Color gridCardSecText = const Color(0xFFC9CCD0);
   static Color splashNameBlue = const Color(0xFF5FC8DF);
 
-  static Color shimmerBaseLight = Colors.grey[300]!;
+  static Color shimmerBaseLight = const Color(0xFFE0E0E0);
   static Color shimmerBaseDark = const Color(0xFF252830);
-  static Color shimmerHighLight = Colors.grey[100]!;
+  static Color shimmerHighLight = const Color(0xFFF5F5F5);
   static Color shimmerHighDark = const Color(0xFF5C606C);
 
   static Color radioSecondTextColor = const Color(0xFFDAD9F3);
