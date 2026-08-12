@@ -221,40 +221,7 @@ class RadioPlayerScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CountDownTimer(
-                        onTap: () {
-                          radioModel.loadCount().then((value) {
-                            if (radioModel.countAds == 0) {
-                              radioModel.admobHelper.showInterad(context);
-                              adsCheck.openAdsOnMessageEvent().then((value) {
-                                if (value.contains(Constant.DISMISS)) {
-                                  radioModel.savedAds().then((value) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const TimerView(),
-                                      ),
-                                    );
-                                  });
-                                } else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const TimerView()),
-                                  );
-                                }
-                              });
-                            } else {
-                              radioModel.savedAds().then((value) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const TimerView()),
-                                );
-                              });
-                            }
-                          });
-                        },
+                        onTap: () => _openTimer(context, radioModel, adsCheck),
                       ),
                       Gap(AppLayout.getHeight(20)),
                       if (radioModel.isGetVol)
@@ -322,6 +289,33 @@ class RadioPlayerScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  /// Capture the navigator before any await so the BuildContext is never used
+  /// across an async gap -- this screen is stateless, so there is no mounted
+  /// check available to fall back on.
+  Future<void> _openTimer(
+    BuildContext context,
+    RadioNotifier radioModel,
+    AdsCallBack adsCheck,
+  ) async {
+    final navigator = Navigator.of(context);
+
+    await radioModel.loadCount();
+
+    if (radioModel.countAds == 0) {
+      radioModel.admobHelper.showInterad(navigator.context);
+      final result = await adsCheck.openAdsOnMessageEvent();
+      if (result.contains(Constant.DISMISS)) {
+        await radioModel.savedAds();
+      }
+    } else {
+      await radioModel.savedAds();
+    }
+
+    navigator.push(
+      MaterialPageRoute(builder: (context) => const TimerView()),
     );
   }
 

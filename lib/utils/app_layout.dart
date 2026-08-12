@@ -1,12 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'ColorUtils.dart';
 
 class AppLayout {
-  static getSize() {
-    WidgetsBinding? binding = WidgetsBinding.instance;
-    return binding.window.physicalSize / binding.window.devicePixelRatio;
+  /// WidgetsBinding.window is deprecated and slated for removal ahead of
+  /// multi-window support. The implicit view carries the same metrics.
+  static Size getSize() {
+    final FlutterView view =
+        WidgetsBinding.instance.platformDispatcher.views.first;
+    return view.physicalSize / view.devicePixelRatio;
   }
 
   static getScreenHeight() {

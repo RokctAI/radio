@@ -98,9 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToHome() {
-    if (kDebugMode) {
-      print("Navigating to home screen");
-    }
+    if (!mounted) return;
     if (AppOpenAdManager.isLoaded) {
       appOpenAdManager.showAdIfAvailable(context);
     }
@@ -111,9 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToWebView() {
-    if (kDebugMode) {
-      print("Navigating to WebView");
-    }
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => WebViewPage(url: Constant.rateUsUrl)),
@@ -136,22 +132,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     AppLayout.screenPortrait1();
-    getAdsData().then((value){
-      Future.delayed(const Duration(seconds: 2), () {
-        if (AppOpenAdManager.isLoaded) {
-          appOpenAdManager.showAdIfAvailable(context);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-          );
-        }
-      });
-    });
 
     return Scaffold(
       body: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {

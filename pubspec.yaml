@@ -42,13 +42,15 @@ dependencies:
   remixicon: ^1.2.0
   package_info_plus: ^8.3.0
   device_info_plus: ^10.1.2
+  # Imported by splash_screen.dart for FlutterNativeSplash.remove(), so it has
+  # to be a real dependency, not just the dev-time generator.
+  flutter_native_splash: ^2.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-  flutter_native_splash: ^2.4.2
 
 flutter_native_splash:
   background_image: assets/images/splash.png
