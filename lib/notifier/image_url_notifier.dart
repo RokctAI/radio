@@ -7,7 +7,7 @@ import '../utils/app_layout.dart';
 class ImageUrlNotifier extends ChangeNotifier {
   String _imageUrl = '';
   Image _image = Image.asset(
-    'assets/images/back_blur_img.webp',
+    'assets/images/back_blur_img.jpg',
     height: AppLayout.getScreenHeight(),
     width: AppLayout.getScreenWidth(),
     fit: BoxFit.fill,
