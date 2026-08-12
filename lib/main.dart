@@ -7,12 +7,12 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 import 'package:single_radio/config/remote_config.dart';
-import 'package:single_radio/ads/application/ads_callback.dart';
-import 'package:single_radio/radio/application/image_url_notifier.dart';
-import 'package:single_radio/radio/application/radio_notifier.dart';
-import 'package:single_radio/core/application/theme_provider.dart';
-import 'package:single_radio/sleep_timer/application/timer_notifier.dart';
-import 'package:single_radio/core/presentation/pages/splash_screen.dart';
+import 'package:single_radio/ads/application/callback/ads_callback.dart';
+import 'package:single_radio/radio/application/artwork/artwork_notifier.dart';
+import 'package:single_radio/radio/application/playback/playback_notifier.dart';
+import 'package:single_radio/core/application/theme/theme_provider.dart';
+import 'package:single_radio/sleep_timer/application/timer/timer_notifier.dart';
+import 'package:single_radio/core/presentation/pages/splash/splash_page.dart';
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/utils/app_pref.dart';
 
@@ -60,15 +60,15 @@ void main() async {
 
     FacebookAudienceNetwork.init(iOSAdvertiserTrackingEnabled: true);
 
-    late final radiomodel = RadioNotifier();
+    late final radiomodel = PlaybackNotifier();
 
     runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ThemeProvider()..initialize()),
-          ChangeNotifierProvider(create: (context) => ImageUrlNotifier()),
+          ChangeNotifierProvider(create: (context) => ArtworkNotifier()),
           ChangeNotifierProvider(create: (context) => AdsCallBack()),
-          ChangeNotifierProvider<RadioNotifier>.value(value: radiomodel),
+          ChangeNotifierProvider<PlaybackNotifier>.value(value: radiomodel),
           ChangeNotifierProvider(create: (context) => TimerNotifier(onTimer: radiomodel.pause)),
           Provider<RemoteConfigService>.value(value: remoteConfigService),
         ],

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:single_radio/core/utils/app_layout.dart';
 
-class ImageUrlNotifier extends ChangeNotifier {
+class ArtworkNotifier extends ChangeNotifier {
   String _imageUrl = '';
   Image _image = Image.asset(
     'assets/images/back_blur_img.jpg',

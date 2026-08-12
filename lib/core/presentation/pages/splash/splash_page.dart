@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:single_radio/ads/infrastructure/open_ad_manager.dart';
 import 'package:single_radio/ads/infrastructure/interstitial_ad.dart';
-import 'package:single_radio/core/application/theme_provider.dart';
+import 'package:single_radio/core/application/theme/theme_provider.dart';
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
-import 'package:single_radio/radio/presentation/pages/home_screen.dart';
+import 'package:single_radio/radio/presentation/pages/home/home_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:single_radio/core/presentation/pages/webview.dart';
+import 'package:single_radio/core/presentation/pages/webview/webview_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

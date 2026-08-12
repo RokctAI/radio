@@ -3,13 +3,13 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:single_radio/core/utils/duration_extension.dart';
 import 'package:single_radio/ads/infrastructure/interstitial_ad.dart';
-import 'package:single_radio/sleep_timer/application/timer_notifier.dart';
+import 'package:single_radio/sleep_timer/application/timer/timer_notifier.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
 import 'package:single_radio/core/presentation/theme/app_style.dart';
 import 'package:single_radio/core/utils/language.dart';
-import 'package:single_radio/radio/presentation/widgets/blur_bg_widget.dart';
+import 'package:single_radio/core/presentation/components/blurred_background.dart';
 
 class TimerView extends StatefulWidget {
   const TimerView({super.key});

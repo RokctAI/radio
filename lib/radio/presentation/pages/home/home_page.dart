@@ -8,13 +8,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:single_radio/ads/infrastructure/open_ad_manager.dart';
-import 'package:single_radio/core/presentation/widgets/no_internet_dialog.dart';
-import 'package:single_radio/radio/application/radio_notifier.dart';
+import 'package:single_radio/core/presentation/components/no_internet_dialog.dart';
+import 'package:single_radio/radio/application/playback/playback_notifier.dart';
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
 import 'package:single_radio/core/presentation/theme/app_style.dart';
-import 'package:single_radio/radio/presentation/widgets/blur_bg_widget.dart';
-import 'package:single_radio/radio/presentation/pages/radio_player_page.dart';
+import 'package:single_radio/core/presentation/components/blurred_background.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/radio_player_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             child: MultiProvider(
               providers: [
-                ChangeNotifierProvider(create: (_) => RadioNotifier()),
+                ChangeNotifierProvider(create: (_) => PlaybackNotifier()),
               ],
               child: RadioPlayerScreen(
                 onOpenSlider: () {

@@ -2,7 +2,7 @@
 import 'package:remixicon/remixicon.dart';
 
 import 'package:single_radio/config/constant.dart';
-import 'package:single_radio/radio/presentation/widgets/animated_stand_widget.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/widgets/animated_stand.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
 
 class VinylPlayer extends StatefulWidget {

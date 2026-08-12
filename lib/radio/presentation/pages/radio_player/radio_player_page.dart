@@ -5,19 +5,19 @@ import 'package:gap/gap.dart';
 import 'package:music_visualizer/music_visualizer.dart';
 import 'package:provider/provider.dart';
 import 'package:remixicon/remixicon.dart';
-import 'package:single_radio/sleep_timer/presentation/widgets/count_down_timer.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/widgets/count_down_timer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import 'package:single_radio/ads/application/ads_callback.dart';
-import 'package:single_radio/radio/presentation/widgets/exit_dialog.dart';
-import 'package:single_radio/radio/application/image_url_notifier.dart';
-import 'package:single_radio/radio/application/radio_notifier.dart';
+import 'package:single_radio/ads/application/callback/ads_callback.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/widgets/exit_dialog.dart';
+import 'package:single_radio/radio/application/artwork/artwork_notifier.dart';
+import 'package:single_radio/radio/application/playback/playback_notifier.dart';
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
-import 'package:single_radio/radio/presentation/widgets/blur_bg_widget.dart';
-import 'package:single_radio/radio/presentation/widgets/seek_bar.dart';
-import 'package:single_radio/radio/presentation/widgets/vinyl_widget.dart';
-import 'package:single_radio/sleep_timer/presentation/pages/timer_screen.dart';
+import 'package:single_radio/core/presentation/components/blurred_background.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/widgets/seek_bar.dart';
+import 'package:single_radio/radio/presentation/pages/radio_player/widgets/vinyl_player.dart';
+import 'package:single_radio/sleep_timer/presentation/pages/timer/timer_page.dart';
 
 class RadioPlayerScreen extends StatelessWidget {
   final Function() onOpenSlider;
@@ -29,9 +29,9 @@ class RadioPlayerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final adsCheck = Provider.of<AdsCallBack>(context);
-    final radioModel = Provider.of<RadioNotifier>(context);
-    final imageUrlNotifier = Provider.of<ImageUrlNotifier>(context);
-    radioModel.imageUrlNotifier = imageUrlNotifier;
+    final radioModel = Provider.of<PlaybackNotifier>(context);
+    final artworkNotifier = Provider.of<ArtworkNotifier>(context);
+    radioModel.artworkNotifier = artworkNotifier;
     return PopScope(
       // WillPopScope is deprecated. canPop stays false so the back gesture is
       // always handled here, which means the confirmed-exit path now has to
@@ -126,7 +126,7 @@ class RadioPlayerScreen extends StatelessWidget {
                                       Image artwork;
                                       if (snapshot.hasData) {
                                         artwork = snapshot.data;
-                                        radioModel.imageUrlNotifier.setImage(snapshot.data);
+                                        radioModel.artworkNotifier.setImage(snapshot.data);
                                       } else {
                                         artwork = radioModel.imageUrl.isNotEmpty
                                             ? Image.network(radioModel.imageUrl, fit: BoxFit.cover)
@@ -301,7 +301,7 @@ class RadioPlayerScreen extends StatelessWidget {
   /// check available to fall back on.
   Future<void> _openTimer(
     BuildContext context,
-    RadioNotifier radioModel,
+    PlaybackNotifier radioModel,
     AdsCallBack adsCheck,
   ) async {
     final navigator = Navigator.of(context);
@@ -324,7 +324,7 @@ class RadioPlayerScreen extends StatelessWidget {
     );
   }
 
-  void _toggleVolume(RadioNotifier radioModel) {
+  void _toggleVolume(PlaybackNotifier radioModel) {
     if (radioModel.currentVolume == 0) {
       radioModel.setVolume(100);
     } else {

@@ -9,7 +9,7 @@ import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/presentation/theme/app_style.dart';
-import 'package:single_radio/ads/application/ads_callback.dart';
+import 'package:single_radio/ads/application/callback/ads_callback.dart';
 import 'package:facebook_audience_network/ad/ad_banner.dart' as fb;
 
 InterstitialAd? _interstitialAd;

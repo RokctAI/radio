@@ -6,12 +6,12 @@ import 'package:volume_regulator/volume_regulator.dart';
 import 'package:single_radio/ads/infrastructure/interstitial_ad.dart';
 import 'package:single_radio/config/constant.dart';
 import 'package:single_radio/core/utils/app_pref.dart';
-import 'package:single_radio/radio/application/image_url_notifier.dart';
+import 'package:single_radio/radio/application/artwork/artwork_notifier.dart';
 import 'package:http/http.dart' as http;
 
-class RadioNotifier with ChangeNotifier {
+class PlaybackNotifier with ChangeNotifier {
   final RadioPlayer radioPlayer = RadioPlayer();
-  ImageUrlNotifier imageUrlNotifier = ImageUrlNotifier();
+  ArtworkNotifier artworkNotifier = ArtworkNotifier();
   bool isPlaying = false;
   bool isLoaded = false;
   bool isGetVol = false;
@@ -47,7 +47,7 @@ class RadioNotifier with ChangeNotifier {
     AppPref.sharedPrefInt(Constant.adsInterval, countAds);
   }
 
-  RadioNotifier() {
+  PlaybackNotifier() {
     initRadioPlayer();
   }
 
@@ -77,7 +77,7 @@ class RadioNotifier with ChangeNotifier {
         metadata = _normalizeMetadata(value);
         if (metadata != null && metadata![2].isNotEmpty) {
           imageUrl = metadata![2];
-          imageUrlNotifier.setImageUrl(imageUrl);
+          artworkNotifier.setImageUrl(imageUrl);
         } else {
           fetchSongImage();
         }
@@ -147,7 +147,7 @@ class RadioNotifier with ChangeNotifier {
         if (matchedTrack != null) {
           imageUrl = matchedTrack['artworkUrl100'];
           notifyListeners();
-          imageUrlNotifier.setImageUrl(imageUrl);
+          artworkNotifier.setImageUrl(imageUrl);
           radioPlayer.setDefaultArtwork(imageUrl);
         } else {
           imageUrl = '';
@@ -204,7 +204,7 @@ class RadioNotifier with ChangeNotifier {
               String coverBigUrl = selectedSong['album']['cover_big'];
               imageUrl = coverBigUrl;
               notifyListeners();
-              imageUrlNotifier.setImageUrl(imageUrl);
+              artworkNotifier.setImageUrl(imageUrl);
               radioPlayer.setDefaultArtwork(imageUrl);
             } else {
               fetchSongImageFromOther();

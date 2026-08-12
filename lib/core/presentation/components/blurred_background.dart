@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:single_radio/radio/application/image_url_notifier.dart';
+import 'package:single_radio/radio/application/artwork/artwork_notifier.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
 
 class BlurredBackgroundWithImage extends StatelessWidget {
@@ -13,13 +13,13 @@ class BlurredBackgroundWithImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrlNotifier = Provider.of<ImageUrlNotifier>(context);
+    final artworkNotifier = Provider.of<ArtworkNotifier>(context);
     return Stack(
       children: [
-        imageUrlNotifier.imageUrl.isNotEmpty
+        artworkNotifier.imageUrl.isNotEmpty
             ? Positioned.fill(
                 child: Image.network(
-                  imageUrlNotifier.imageUrl,
+                  artworkNotifier.imageUrl,
                   height: AppLayout.getScreenHeight(),
                   width: AppLayout.getScreenWidth(),
                   fit: BoxFit.fill,
@@ -30,7 +30,7 @@ class BlurredBackgroundWithImage extends StatelessWidget {
                 ),
               )
             : Positioned.fill(
-                    child: imageUrlNotifier.image.blurred(
+                    child: artworkNotifier.image.blurred(
                       blur: 40,
                       blurColor: Colors.black,
                       colorOpacity: .5,

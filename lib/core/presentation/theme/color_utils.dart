@@ -1,6 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:single_radio/core/presentation/theme/app_style.dart';
-import 'package:single_radio/core/application/theme_provider.dart';
+import 'package:single_radio/core/application/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class ColorUtils {

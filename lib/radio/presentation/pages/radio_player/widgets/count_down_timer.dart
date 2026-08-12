@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:remixicon/remixicon.dart';
 
-import 'package:single_radio/sleep_timer/application/timer_notifier.dart';
+import 'package:single_radio/sleep_timer/application/timer/timer_notifier.dart';
 import 'package:single_radio/core/utils/app_layout.dart';
 import 'package:single_radio/core/utils/duration_extension.dart';
 
