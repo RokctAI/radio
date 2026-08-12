@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:single_radio/infrastructure/models/data/track_metadata.dart';
 
 part 'playback_state.freezed.dart';
 
@@ -11,11 +12,11 @@ class PlaybackState with _$PlaybackState {
     @Default(0) double volume,
     @Default(false) bool backButtonPressed,
     @Default('') String imageUrl,
-    List<String>? metadata,
+    @Default(TrackMetadata()) TrackMetadata metadata,
   }) = _PlaybackState;
 
   const PlaybackState._();
 
-  String get artist => (metadata?.isNotEmpty ?? false) ? metadata![0] : '';
-  String get track => ((metadata?.length ?? 0) > 1) ? metadata![1] : '';
+  String get artist => metadata.artist;
+  String get track => metadata.track;
 }

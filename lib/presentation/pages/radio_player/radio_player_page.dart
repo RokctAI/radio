@@ -185,7 +185,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                           child: Column(
                             children: [
                               TextScroll(
-                                radioModel.metadata?[1] ?? '',
+                                radioModel.track,
                                 intervalSpaces: 7,
                                 velocity: const Velocity(pixelsPerSecond: Offset(30, 0)),
                                 delayBefore: const Duration(seconds: 1),
@@ -198,7 +198,7 @@ class RadioPlayerScreen extends ConsumerWidget {
                                 ),
                               ),
                               TextScroll(
-                                radioModel.metadata?[0] ?? '',
+                                radioModel.artist,
                                 intervalSpaces: 10,
                                 velocity: const Velocity(pixelsPerSecond: Offset(40, 0)),
                                 delayBefore: const Duration(seconds: 1),
