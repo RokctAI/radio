@@ -105,6 +105,9 @@ class RemoteConfigService {
     Constant.rateUsUrl = _remoteConfig.getString('rateUsUrl');
     Constant.showADS = _remoteConfig.getBool('showADS');
     Constant.oneSignalId = _remoteConfig.getString('oneSignalId');
+    final separator = _remoteConfig.getString('titleSeparator');
+    if (separator.isNotEmpty) Constant.titleSeparator = separator;
+    Constant.deezerApiKey = _remoteConfig.getString('deezerApiKey');
   }
 
   // Getter methods for each config value
@@ -118,6 +121,8 @@ class RemoteConfigService {
   String get privacyUrl => _remoteConfig.getString('privacyUrl');
   String get aboutUsUrl => _remoteConfig.getString('aboutUsUrl');
   String get rateUsUrl => _remoteConfig.getString('rateUsUrl');
-  bool get showADS => _remoteConfig.getBool('false');
- String get oneSignalId => _remoteConfig.getString('oneSignalId');
+  bool get showADS => _remoteConfig.getBool('showADS');
+  String get oneSignalId => _remoteConfig.getString('oneSignalId');
+  String get titleSeparator => _remoteConfig.getString('titleSeparator');
+  String get deezerApiKey => _remoteConfig.getString('deezerApiKey');
 }

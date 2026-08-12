@@ -38,14 +38,16 @@ class RadioPlayerScreen extends StatelessWidget {
           return false;
         } else {
           if (radioModel.isPlaying) {
-            bool exitConfirmed = await showDialog(
+            // showDialog returns null when the barrier is tapped, so this
+            // must stay nullable -- reading it as a plain bool threw.
+            final exitConfirmed = await showDialog<bool>(
               context: context,
               barrierColor: Colors.black.withOpacity(.5),
               builder: (BuildContext dialogContext) {
                 return const ExitDialog();
               },
             );
-            if (exitConfirmed) {
+            if (exitConfirmed == true) {
               return true;
             } else {
               radioModel.backButtonPressed = true;
@@ -53,7 +55,7 @@ class RadioPlayerScreen extends StatelessWidget {
               return false;
             }
           } else {
-            bool exitConfirmed = await showDialog(
+            final exitConfirmed = await showDialog<bool>(
               context: context,
               barrierColor: Colors.black.withOpacity(.5),
               builder: (BuildContext dialogContext) {
@@ -321,69 +323,6 @@ class RadioPlayerScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> _handlePlayingExit(BuildContext context, RadioNotifier radioModel) async {
-    final navigator = Navigator.of(context);
-    bool? exitConfirmed = await showDialog<bool>(
-      context: context,
-      barrierColor: Colors.black.withOpacity(.5),
-      builder: (BuildContext dialogContext) {
-        return const ExitDialog();
-      },
-    );
-
-    if (exitConfirmed == true) {
-      navigator.pop();
-    } else {
-      radioModel.backButtonPressed = true;
-      await BackButtonMethods.minimize();
-    }
-  }
-
-  Future<void> _handleNotPlayingExit(BuildContext context) async {
-    final navigator = Navigator.of(context);
-    bool? exitConfirmed = await showDialog<bool>(
-      context: context,
-      barrierColor: Colors.black.withOpacity(.5),
-      builder: (BuildContext dialogContext) {
-        return const ExitDialog(isNotPlaying: true);
-      },
-    );
-
-    if (exitConfirmed == true) {
-      navigator.pop();
-    }
-  }
-
-  void _handleTimerTap(BuildContext context, RadioNotifier radioModel, AdsCallBack adsCheck) {
-    radioModel.loadCount().then((value) {
-      if (radioModel.countAds == 0) {
-        radioModel.admobHelper.showInterad(context);
-        adsCheck.openAdsOnMessageEvent().then((value) {
-          if (value.contains(Constant.DISMISS)) {
-            radioModel.savedAds().then((_) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TimerView()),
-              );
-            });
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const TimerView()),
-            );
-          }
-        });
-      } else {
-        radioModel.savedAds().then((_) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const TimerView()),
-          );
-        });
-      }
-    });
   }
 
   void _toggleVolume(RadioNotifier radioModel) {

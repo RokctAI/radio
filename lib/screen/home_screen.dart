@@ -11,7 +11,6 @@ import '../ads/open_ad_manager.dart';
 import '../dialog/no_internet_dialog.dart';
 import '../notifier/radio_notifier.dart';
 import '../utils/Constant.dart';
-import '../utils/webview.dart';
 import '../utils/app_layout.dart';
 import '../utils/app_style.dart';
 import '../widget/blur_bg_widget.dart';
@@ -32,47 +31,33 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   bool isPaused = false;
 
   Timer? _timer;
-  bool _connectionStatus = true;
-  late StreamSubscription<ConnectivityResult> _subscription;
+  StreamSubscription<List<ConnectivityResult>>? _subscription;
+  bool _noInternetDialogOpen = false;
+
+  /// connectivity_plus 6 reports a list of active transports. Offline is an
+  /// empty list, or one that contains nothing but [ConnectivityResult.none].
+  bool _isOffline(List<ConnectivityResult> results) =>
+      results.isEmpty || results.every((r) => r == ConnectivityResult.none);
 
   Future<void> _checkConnectivityOpen() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        _connectionStatus = false;
-      });
-
-      // Show dialog for no internet
-      if(mounted) {
-        await showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return NoInternetDialog(onRetry: () {
-              _checkConnectivityOpen();
-            },);
-          },
-        );
-      }
-    }
+    await _handleConnectivity(await Connectivity().checkConnectivity());
   }
 
-  Future<void> _checkConnectivity(ConnectivityResult connectivityResult) async {
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        _connectionStatus = false;
-      });
+  Future<void> _handleConnectivity(List<ConnectivityResult> results) async {
+    if (!_isOffline(results) || !mounted || _noInternetDialogOpen) return;
 
-      if(!_connectionStatus) {
-        await showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return NoInternetDialog(onRetry: (){
-              _checkConnectivityOpen();
-            },);
+    _noInternetDialogOpen = true;
+    await showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return NoInternetDialog(
+          onRetry: () {
+            _checkConnectivityOpen();
           },
         );
-      }
-    }
+      },
+    );
+    _noInternetDialogOpen = false;
   }
 
   void _startTimer() {
@@ -90,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // _subscription = Connectivity().onConnectivityChanged.listen(_checkConnectivity);
+    _subscription =
+        Connectivity().onConnectivityChanged.listen(_handleConnectivity);
     _checkConnectivityOpen();
     appOpenAdManager.loadAd();
     WidgetsBinding.instance.addObserver(this);
@@ -99,9 +85,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void dispose() {
     _cancelTimer();
-    _subscription.cancel();
-    super.dispose();
+    _subscription?.cancel();
     WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -264,43 +250,6 @@ class _SliderMenuItem extends StatelessWidget {
   final Function(String)? onTap;
 
   const _SliderMenuItem({required this.title, required this.onTap, required this.url});
-
-  void _launchURL(BuildContext context) {
-    if (url == Constant.whatsappUrl || url == Constant.rateUsUrl || url == Constant.facebookUrl) {
-      _launchExternalURL(context);
-    } else {
-      _navigateToWebView(context);
-    }
-  }
-
-  void _launchExternalURL(BuildContext context) async {
-    final uri = Uri.parse(url);
-    try {
-      bool launched = await launchUrl(uri);
-      if (!launched) {
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Could not launch $url')),
-          );
-        }
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error launching $url: $e')),
-        );
-      }
-    }
-  }
-
-  void _navigateToWebView(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => WebViewPage(url: url),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

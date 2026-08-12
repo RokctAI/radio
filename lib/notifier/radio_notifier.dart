@@ -74,7 +74,7 @@ class RadioNotifier with ChangeNotifier {
       });
 
       radioPlayer.metadataStream.listen((value) async {
-        metadata = value;
+        metadata = _normalizeMetadata(value);
         if (metadata != null && metadata![2].isNotEmpty) {
           imageUrl = metadata![2];
           imageUrlNotifier.setImageUrl(imageUrl);
@@ -88,8 +88,39 @@ class RadioNotifier with ChangeNotifier {
     }
   }
 
+  /// The plugin splits ICY titles on " - " and pads the result to
+  /// [title, '', cover] when that separator is absent. This station sends
+  /// "Artist-Title", so every track arrived with an empty second field --
+  /// leaving the large title line blank and sending an empty search term to
+  /// the artwork lookups. Split on [Constant.titleSeparator] instead, and if
+  /// there is nothing to split on, show the whole title on the title line.
+  List<String> _normalizeMetadata(List<String> value) {
+    final result = List<String>.from(value);
+    while (result.length < 3) {
+      result.add('');
+    }
+
+    if (result[1].trim().isNotEmpty || result[0].trim().isEmpty) {
+      return result;
+    }
+
+    final title = result[0].trim();
+    final separator = Constant.titleSeparator;
+    final at = separator.isEmpty ? -1 : title.indexOf(separator);
+
+    if (at > 0 && at < title.length - separator.length) {
+      result[0] = title.substring(0, at).trim();
+      result[1] = title.substring(at + separator.length).trim();
+    } else {
+      result[0] = Constant.appName;
+      result[1] = title;
+    }
+
+    return result;
+  }
+
   void fetchSongImageFromOther() async {
-    const String baseUrl = 'https://itunes.apple.com/search';
+    final String baseUrl = Constant.itunesSearchUrl;
     final String searchTerm = metadata![1].toString().replaceAll(' ', '+');
     final String artistName = metadata![0].toString();
     final String url = '$baseUrl?term=$searchTerm&entity=song';
@@ -127,14 +158,19 @@ class RadioNotifier with ChangeNotifier {
   }
 
   void fetchSongImage() async {
-    const String apiKey = 'dc203773bdmshebd56d76c1b04b9p11b91djsnb0840e0eb2c7';
-    const String baseUrl = 'https://deezerdevs-deezer.p.rapidapi.com/search';
+    final String apiKey = Constant.deezerApiKey;
+    if (apiKey.isEmpty) {
+      fetchSongImageFromOther();
+      return;
+    }
+
+    final String baseUrl = Constant.deezerSearchUrl;
     final String searchTerm = metadata![1].toString();
     final String desiredArtist = metadata![0].toString();
 
     final Map<String, String> headers = {
       'X-RapidAPI-Key': apiKey,
-      'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
+      'X-RapidAPI-Host': Constant.deezerSearchHost,
     };
 
     final String url = '$baseUrl?q=$searchTerm';

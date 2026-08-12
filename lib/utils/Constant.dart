@@ -20,6 +20,22 @@ class Constant {
 
   static String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
 
+  // radio_player splits ICY titles on " - ". Stations that use a different
+  // separator fall through to this one. Zeno sends "Artist-Title" for this
+  // mount, with no spaces. Set to '' to keep the whole title on one line.
+  static String titleSeparator = '-';
+
+  // Artwork lookup endpoints. Zeno sends no cover art for this mount, so the
+  // artist and track are searched against these instead.
+  static String itunesSearchUrl = 'https://itunes.apple.com/search';
+  static String deezerSearchHost = 'deezerdevs-deezer.p.rapidapi.com';
+  static String deezerSearchUrl =
+      'https://deezerdevs-deezer.p.rapidapi.com/search';
+
+  // Deezer artwork lookup via RapidAPI. Leave empty to skip Deezer and use
+  // iTunes only; set it from Firebase Remote Config rather than in source.
+  static String deezerApiKey = '';
+
   //vinyl movement variable
   //if you want to stop rotating set isRotate false
   static const bool isRotate = true;

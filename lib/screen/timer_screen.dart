@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:single_radio/screen/radio_player.dart';
 import '../../utils/duration_extension.dart';
 import '../ads/InterstitialAd.dart';
 import '../notifier/timer_notifier.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:remixicon/remixicon.dart';
-import '../utils/ColorUtils.dart';
 import '../utils/app_layout.dart';
 import '../utils/app_style.dart';
 import '../utils/language.dart';

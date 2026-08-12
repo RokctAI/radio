@@ -165,9 +165,7 @@ class CustomSliderTrackShape extends SliderTrackShape {
 
     canvas.drawLine(startPoint, endPoint, paint);
 
-    if (thumbCenter != null) {
-      canvas.drawCircle(thumbCenter, 2.0, paint);
-    }
+    canvas.drawCircle(thumbCenter, 2.0, paint);
     if (secondaryOffset != null) {
       canvas.drawCircle(secondaryOffset, 2.0, paint);
     }
