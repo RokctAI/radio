@@ -88,12 +88,16 @@ class RadioNotifier with ChangeNotifier {
     }
   }
 
-  /// The plugin splits ICY titles on " - " and pads the result to
-  /// [title, '', cover] when that separator is absent. This station sends
-  /// "Artist-Title", so every track arrived with an empty second field --
-  /// leaving the large title line blank and sending an empty search term to
-  /// the artwork lookups. Split on [Constant.titleSeparator] instead, and if
-  /// there is nothing to split on, show the whole title on the title line.
+  /// Normalises an ICY metadata triple into [artist, track, cover].
+  ///
+  /// radio_player only splits the stream title on " - " and pads the result to
+  /// [title, '', cover] when it finds no match, which leaves the track field
+  /// empty. The UI renders the track as the headline and the artwork lookups
+  /// use it as their search term, so an unsplit title costs both.
+  ///
+  /// Each candidate in [Constant.titleSeparators] is tried in order. If none
+  /// matches, the whole title becomes the track and the station name stands in
+  /// as the artist, so the headline is never blank.
   List<String> _normalizeMetadata(List<String> value) {
     final result = List<String>.from(value);
     while (result.length < 3) {
@@ -105,17 +109,19 @@ class RadioNotifier with ChangeNotifier {
     }
 
     final title = result[0].trim();
-    final separator = Constant.titleSeparator;
-    final at = separator.isEmpty ? -1 : title.indexOf(separator);
 
-    if (at > 0 && at < title.length - separator.length) {
-      result[0] = title.substring(0, at).trim();
-      result[1] = title.substring(at + separator.length).trim();
-    } else {
-      result[0] = Constant.appName;
-      result[1] = title;
+    for (final separator in Constant.titleSeparators) {
+      if (separator.isEmpty) continue;
+      final at = title.indexOf(separator);
+      if (at > 0 && at < title.length - separator.length) {
+        result[0] = title.substring(0, at).trim();
+        result[1] = title.substring(at + separator.length).trim();
+        return result;
+      }
     }
 
+    result[0] = Constant.appName;
+    result[1] = title;
     return result;
   }
 

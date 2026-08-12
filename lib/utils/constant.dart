@@ -20,13 +20,14 @@ class Constant {
 
   static String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
 
-  // radio_player splits ICY titles on " - ". Stations that use a different
-  // separator fall through to this one. Zeno sends "Artist-Title" for this
-  // mount, with no spaces. Set to '' to keep the whole title on one line.
-  static String titleSeparator = '-';
+  // radio_player only splits ICY titles on " - ". When a stream uses something
+  // else, the whole title arrives as one field. These are tried in order until
+  // one is found; the first match wins, so list the more specific forms first.
+  // Set to an empty list to always keep the title on one line.
+  static List<String> titleSeparators = const [' - ', ' – ', ' | ', '-'];
 
-  // Artwork lookup endpoints. Zeno sends no cover art for this mount, so the
-  // artist and track are searched against these instead.
+  // Artwork lookup endpoints, used when a stream carries no cover art of its
+  // own and the artist and track have to be searched instead.
   static String itunesSearchUrl = 'https://itunes.apple.com/search';
   static String deezerSearchHost = 'deezerdevs-deezer.p.rapidapi.com';
   static String deezerSearchUrl =

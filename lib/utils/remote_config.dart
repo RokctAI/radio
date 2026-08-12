@@ -97,8 +97,13 @@ class RemoteConfigService {
     Constant.rateUsUrl = _remoteConfig.getString('rateUsUrl');
     Constant.showADS = _remoteConfig.getBool('showADS');
     Constant.oneSignalId = _remoteConfig.getString('oneSignalId');
-    final separator = _remoteConfig.getString('titleSeparator');
-    if (separator.isNotEmpty) Constant.titleSeparator = separator;
+    // Comma-separated, in priority order. Left at the built-in defaults when
+    // the key is absent so a station only sets it if its titles need it.
+    final separators = _remoteConfig.getString('titleSeparators');
+    if (separators.isNotEmpty) {
+      Constant.titleSeparators =
+          separators.split(',').where((s) => s.isNotEmpty).toList();
+    }
     Constant.deezerApiKey = _remoteConfig.getString('deezerApiKey');
   }
 
@@ -115,6 +120,6 @@ class RemoteConfigService {
   String get rateUsUrl => _remoteConfig.getString('rateUsUrl');
   bool get showADS => _remoteConfig.getBool('showADS');
   String get oneSignalId => _remoteConfig.getString('oneSignalId');
-  String get titleSeparator => _remoteConfig.getString('titleSeparator');
+  String get titleSeparators => _remoteConfig.getString('titleSeparators');
   String get deezerApiKey => _remoteConfig.getString('deezerApiKey');
 }
