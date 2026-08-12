@@ -1,20 +1,20 @@
 ﻿// main.dart
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'utils/firebase_init.dart';
+import 'package:single_radio/config/firebase_init.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
-import 'utils/remote_config.dart';
-import 'ads/ads_callback.dart';
-import 'notifier/image_url_notifier.dart';
-import 'notifier/radio_notifier.dart';
-import 'notifier/theme_provider.dart';
-import 'notifier/timer_notifier.dart';
-import 'screen/splash_screen.dart';
-import 'utils/constant.dart';
-import 'utils/app_pref.dart';
+import 'package:single_radio/config/remote_config.dart';
+import 'package:single_radio/ads/application/ads_callback.dart';
+import 'package:single_radio/radio/application/image_url_notifier.dart';
+import 'package:single_radio/radio/application/radio_notifier.dart';
+import 'package:single_radio/core/application/theme_provider.dart';
+import 'package:single_radio/sleep_timer/application/timer_notifier.dart';
+import 'package:single_radio/core/presentation/pages/splash_screen.dart';
+import 'package:single_radio/config/constant.dart';
+import 'package:single_radio/core/utils/app_pref.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
