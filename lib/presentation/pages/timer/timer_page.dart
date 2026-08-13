@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:single_radio/utils/duration_extension.dart';
 import 'package:single_radio/infrastructure/services/interstitial_ad.dart';
-import 'package:single_radio/application/timer/timer_provider.dart';
+import 'package:radio_sdk/src/common/application/timer/timer_provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:single_radio/utils/app_layout.dart';
@@ -71,13 +71,13 @@ class _TimerPageState extends ConsumerState<TimerPage> {
                           title: Language.stopTimer,
                           color: Styles.primaryColor,
                           textColor: Styles.textColorDark,
-                          onTap: timer.stopTimer,
+                          onTap: timer.stop,
                         )
                       : _Button(
                           title: Language.startTimer,
                           color: Styles.primaryColor,
                           textColor: Styles.textColorDark,
-                          onTap: timer.startTimer,
+                          onTap: timer.start,
                         ),
                   Gap(AppLayout.getHeight(30)),
                   const Text(
@@ -130,7 +130,7 @@ class _CircularSlider extends ConsumerWidget {
         ),
       ),
       onChange: (double value) {
-        timer.setTimer(Duration(seconds: value.toInt()));
+        timer.setDuration(Duration(seconds: value.toInt()));
       },
       initialValue: viewModel.remaining.inSeconds.toDouble(),
       min: 0,

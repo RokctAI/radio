@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:remixicon/remixicon.dart';
 
-import 'package:single_radio/application/timer/timer_provider.dart';
+import 'package:radio_sdk/src/common/application/timer/timer_provider.dart';
 import 'package:single_radio/utils/app_layout.dart';
 import 'package:single_radio/utils/duration_extension.dart';
 
@@ -49,7 +49,7 @@ class CountDownTimer extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  if (viewModel.maxTime > 0)
+                  if (viewModel.maxSeconds > 0)
                     SliderTheme(
                       data: SliderThemeData(
                         trackHeight: 4.0,
@@ -60,13 +60,13 @@ class CountDownTimer extends ConsumerWidget {
                       ),
                       child: Slider(
                         value: viewModel.remaining.inSeconds.toDouble(),
-                        max: viewModel.maxTime.toDouble(),
+                        max: viewModel.maxSeconds.toDouble(),
                         onChanged: (newValue) {},
                       ),
                     ),
                   InkWell(
                       onTap: () {
-                        ref.read(timerProvider.notifier).stopTimer();
+                        ref.read(timerProvider.notifier).stop();
                       },
                       child: const Icon(
                         Remix.close_line, // Replace with the specific Remix icon

@@ -18,6 +18,11 @@ dependencies:
   base_sdk:
     path: ../../../../RokctAI/core/base/dart
 
+  # Migrating SDK by SDK: radio_sdk now owns playback, metadata, artwork,
+  # the sleep timer and the station roster.
+  radio_sdk:
+    path: ../../../../RokctAI/agent/radio/dart
+
   cupertino_icons: ^1.0.8
   gap: ^3.0.1
   # Versions matched to the fleet majority across the 29 SDK pubspecs.
@@ -91,3 +96,9 @@ flutter:
           weight: 600
         - asset: assets/fonts/ClashGrotesk-Bold.ttf
 
+# radio_sdk declares base_sdk as ../base, a placeholder the composer rewrites.
+# With this app as the resolution root that path does not exist, so the host
+# points every base_sdk reference at the real one.
+dependency_overrides:
+  base_sdk:
+    path: ../../../../RokctAI/core/base/dart

@@ -1,4 +1,4 @@
-// main.dart
+﻿// main.dart
 import 'package:base_sdk/src/services/remote_config_service.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 
 import 'package:single_radio/app_constants.dart';
 import 'package:single_radio/application/theme/theme_provider.dart';
-import 'package:single_radio/di/radio_di.dart';
+import 'package:radio_sdk/radio_sdk.dart';
+import 'package:single_radio/infrastructure/repositories/constant_stations_source.dart';
 import 'package:single_radio/presentation/routes/app_router.dart';
 import 'package:single_radio/presentation/theme/theme.dart';
 import 'package:single_radio/utils/app_pref.dart';
@@ -35,6 +36,11 @@ void main() async {
 
     // Installer convention: every composed SDK registers its repositories
     // against their facades here, before runApp.
+    // Host adapter first: radio_sdk defaults to the tenant site, which this
+    // app does not have yet, and its isRegistered guard respects ours.
+    GetIt.instance.registerSingleton<StationsSourceFacade>(
+      const ConstantStationsSource(),
+    );
     RadioSdkDependencies.register(GetIt.instance);
 
     MobileAds.instance.initialize();

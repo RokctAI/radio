@@ -9,10 +9,11 @@ import 'package:remixicon/remixicon.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/count_down_timer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
+import 'package:single_radio/application/ads/ads_counter.dart';
 import 'package:single_radio/application/ads/ads_provider.dart';
-import 'package:single_radio/application/artwork/artwork_provider.dart';
+import 'package:single_radio/infrastructure/services/interstitial_ad.dart';
 import 'package:single_radio/presentation/pages/radio_player/widgets/exit_dialog.dart';
-import 'package:single_radio/application/playback/playback_provider.dart';
+import 'package:radio_sdk/src/common/application/playback/playback_provider.dart';
 import 'package:single_radio/app_constants.dart';
 import 'package:single_radio/infrastructure/services/app_background.dart';
 import 'package:single_radio/utils/app_layout.dart';
@@ -78,7 +79,6 @@ class RadioPlayerPage extends ConsumerWidget {
           }
         } else if (wasPlaying) {
           // "Background" -- keep playing, drop the app to the launcher.
-          playback.markBackButtonPressed();
           await AppBackground.minimize();
         }
       },
@@ -136,7 +136,6 @@ class RadioPlayerPage extends ConsumerWidget {
                                       Image artwork;
                                       if (snapshot.hasData) {
                                         artwork = snapshot.data;
-                                        ref.read(artworkProvider.notifier).setImage(snapshot.data);
                                       } else {
                                         artwork = radioModel.imageUrl.isNotEmpty
                                             ? Image.network(radioModel.imageUrl, fit: BoxFit.cover)
@@ -284,7 +283,7 @@ class RadioPlayerPage extends ConsumerWidget {
                                 ),
                               ),
                               IconButton(
-                                onPressed: playback.togglePlayer,
+                                onPressed: playback.toggle,
                                 icon: Icon(
                                   radioModel.isPlaying ? Remix.pause_circle_fill : Remix.play_circle_fill,
                                   color: radioModel.isPlaying ? AppStyle.textGrey : AppStyle.white,
@@ -312,18 +311,20 @@ class RadioPlayerPage extends ConsumerWidget {
   Future<void> _openTimer(BuildContext context, WidgetRef ref) async {
     final navigator = Navigator.of(context);
     final router = AutoRouter.of(context);
-    final playback = ref.read(playbackProvider.notifier);
 
-    await playback.loadCount();
+    // Ad pacing is app-side now: radio_sdk's playback notifier does not carry
+    // it, since interstitials are promotions' concern rather than radio's.
+    final ads = AdsCounter();
+    await ads.load();
     if (!navigator.mounted) return;
 
-    if (playback.countAds == 0) {
-      playback.admobHelper.showInterad(ref.read(adsProvider.notifier));
+    if (ads.shouldShow) {
+      AdmobHelper().showInterad(ref.read(adsProvider.notifier));
       if (ref.read(adsProvider).outcome.contains(Constant.dismiss)) {
-        await playback.savedAds();
+        await ads.consume();
       }
     } else {
-      await playback.savedAds();
+      await ads.consume();
     }
 
     router.push(const TimerRoute());
