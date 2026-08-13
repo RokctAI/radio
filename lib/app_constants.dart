@@ -19,8 +19,10 @@ class Constant {
   static bool showADS = false;
 
   // Selects mock repositories in the DI hook, so the app runs without
-  // reaching third-party artwork services.
-  static bool isDemo = false;
+  // reaching third-party artwork services. Mirrors base_sdk's
+  // AppConstants.isDemo, which CI sets from the Flutter App Configuration
+  // doctype's is_demo field.
+  static const bool isDemo = bool.fromEnvironment('IS_DEMO');
 
   static String oneSignalId = '3dc65b9c-6f53-449a-9710-2dcfa2821ce4';
 
@@ -37,9 +39,12 @@ class Constant {
   static String deezerSearchUrl =
       'https://deezerdevs-deezer.p.rapidapi.com/search';
 
-  // Deezer artwork lookup via RapidAPI. Leave empty to skip Deezer and use
-  // iTunes only; set it from Firebase Remote Config rather than in source.
-  static String deezerApiKey = '';
+  // Deezer artwork lookup via RapidAPI. Empty skips Deezer and uses iTunes
+  // only. A build-time define like every other secret in the fleet -- the
+  // vendor template this lineage came from shipped a key in source, shared
+  // with every buyer of the item.
+  static const String deezerApiKey =
+      String.fromEnvironment('DEEZER_RAPIDAPI_KEY');
 
   //vinyl movement variable
   //if you want to stop rotating set isRotate false
