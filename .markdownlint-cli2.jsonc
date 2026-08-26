@@ -11,6 +11,12 @@
     // Verbatim pre-slice record moved from the repo root (the original
     // slicing classification). Reflowing a historical document to satisfy
     // line-length/table rules would falsify the record.
-    "docs/SLICE.md"
+    "docs/SLICE.md",
+    // Protocol-distributed working files (initiate.py deploys them,
+    // end_protocol.py prunes them back to init_protocol.md). They are
+    // generated truth - the next initiate run would revert any hand edit -
+    // and the .rokct/.markdownlint.json that used to relax rules for this
+    // directory is itself pruned by end_protocol.py as pristine.
+    ".rokct/**"
   ]
 }
