@@ -43,6 +43,48 @@ final List<TourStep> tourSteps = <TourStep>[
   TourStep('radio_player', 10000, true, (WidgetTester tester, StackRouter router) async {
     router.replaceNamed('/radio');
   }),
+  TourStep('radio_shows', 8000, true, (WidgetTester tester, StackRouter router) async {
+    // The sub-pages live inside RadioShell's horizontal pager and have
+    // no routes of their own. On Home the floating pill is the now-bar
+    // (the nav tabs only appear on sub-pages), so this step travels the
+    // way listeners do: a swipe on the pager toward Shows. Tolerant: if
+    // no pager is on screen, the current frame is captured as-is.
+    final Finder pager = find.byType(PageView);
+    if (pager.evaluate().isNotEmpty) {
+      await tester.drag(pager.first, const Offset(600, 0),
+          warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+    }
+  }),
+  TourStep('radio_stations', 8000, true, (WidgetTester tester, StackRouter router) async {
+    // On a sub-page the floating pill shows the nav tabs
+    // (widgets/radio_nav_tabs.dart, stable ValueKeys), which navigate
+    // deterministically regardless of pager distance. Tolerant: no tabs
+    // on screen means nothing to tap and the frame is captured as-is.
+    final Finder tab = find.byKey(const ValueKey('radio-tab-stations'));
+    if (tab.evaluate().isNotEmpty) {
+      await tester.tap(tab.first, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+    }
+  }),
+  TourStep('radio_profile', 8000, true, (WidgetTester tester, StackRouter router) async {
+    // Same nav-tabs hop as radio_stations, one tab further along.
+    final Finder tab = find.byKey(const ValueKey('radio-tab-profile'));
+    if (tab.evaluate().isNotEmpty) {
+      await tester.tap(tab.first, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+    }
+  }),
+  TourStep('radio_home_return', 4000, false, (WidgetTester tester, StackRouter router) async {
+    // Pure navigation (no still): finish the pager loop back on Home so
+    // the timer chapter starts from the player, the way a listener
+    // would. Tolerant like the other tab hops.
+    final Finder tab = find.byKey(const ValueKey('radio-tab-home'));
+    if (tab.evaluate().isNotEmpty) {
+      await tester.tap(tab.first, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+    }
+  }),
   TourStep('radio_sleep_timer', 6000, true, (WidgetTester tester, StackRouter router) async {
     router.replaceNamed('/radio/timer');
   }),
