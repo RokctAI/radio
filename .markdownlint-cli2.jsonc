@@ -1,0 +1,16 @@
+{
+  // Repo-local config for the shared Code Quality workflow's Markdown Lint
+  // job (markdownlint-cli2 runs in this checkout with CLI globs only, so
+  // this file is the config it picks up). Default rules stay enabled for
+  // everything not listed below - same pattern as supacharge's config.
+  "ignores": [
+    // Xcode-generated platform docs (e.g. Runner/Assets.xcassets/
+    // LaunchImage.imageset/README.md) - generated files are not held to
+    // authoring rules.
+    "ios/**",
+    // Verbatim pre-slice record moved from the repo root (the original
+    // slicing classification). Reflowing a historical document to satisfy
+    // line-length/table rules would falsify the record.
+    "docs/SLICE.md"
+  ]
+}

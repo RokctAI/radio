@@ -1,0 +1,42 @@
+# Guided-tour manifest for the radio app shell.
+#
+# This file is the ONLY place the tour carries this app's branding: SDK tour
+# fragments (each SDK's templates/tour/<sdk>.tour.yaml) stay brand-neutral
+# and receive {app_name}/{app_tagline} by substitution at merge time.
+# The merge, capture and assembly all run in CI via
+# RokctAI/shared-workflows .github/workflows/universal-guided-tour.yml;
+# format documentation lives in that repo at scripts/tour/README.md.
+#
+# One chapter: radio_sdk owns every screen (it is the home SDK - the app
+# opens straight into the player, no sign-in), so the tour is the app-shell
+# welcome beat followed by the radio fragment. In demo builds
+# (--dart-define=IS_DEMO=true) radio_sdk's DI seeds a demo station
+# (ConstantStationsSource) and mock artwork, so the player never shows the
+# no-station state offline.
+#
+# Video colours are intentionally NOT declared here: the assembler derives
+# brand/accent colours from the composed AppStyle when the manifest carries
+# no colour keys, so the video always matches the app's real theme.
+#
+# Outputs land in marketing/tour/ (screenshots + feature-guide.md required,
+# per-chapter videos best-effort).
+app:
+  name: Musina FM
+  tagline: Can you handle the Heat?
+  # Committed app logo (transparent background), shown on the video end card.
+  logo: assets/images/logo2.png
+  # The committed native splash art (also what flutter_native_splash uses).
+  splash: assets/images/splash.png
+video:
+  hook: "Your station, everywhere you go."
+  offer: "Tune in today."
+tour:
+  # Splash settles onto the player - the home SDK's entry page.
+  - step:
+      key: welcome
+      title: "Welcome to Musina FM"
+      caption: "{app_name} - *{app_tagline}* - opens straight onto the record player."
+      action: wait
+      settle: 12
+  # radio_sdk owns the player and sleep-timer screens.
+  - fragment: radio

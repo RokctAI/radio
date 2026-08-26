@@ -1,0 +1,85 @@
+{
+  "name": "rokctapp_composer",
+  "version": "1.0.0",
+  "package_name": "radio",
+  "description": "Configuration list of active SDKs for a radio station app",
+  "sdks": [
+    {
+      "name": "radio_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/agent",
+      "path": "../agent/radio/dart",
+      "ref": "main",
+      "sha256": "1c1e3446025d6d99e250b07edcb97c08606a41257fb456a467b4782d33a72b2b",
+      "_sha256_comment": "SHA-256 of radio/dart/install.py at agent@7c3dddb; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
+      "home_sdk": true,
+      "_comment": "A radio app's home IS the player, so this SDK provides the entry page. Declares StationsTable at schema version 17; one row for a single-station app, many for a multi-station one."
+    },
+    {
+      "name": "base_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/core",
+      "path": "../core/base/dart",
+      "ref": "main",
+      "sha256": "f2278305c3df1bbf65124c334f2b05270d54069e61b52ab1502848d36f62e946",
+      "_sha256_comment": "SHA-256 of base/dart/install.py at core@4793dfa; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
+      "_comment": "Shared kernel (replaces retired core_sdk); provides the app shell templates, AppStyle, the splash and no-connection pages, and the AppDatabase radio_sdk registers StationsTable into."
+    },
+    {
+      "name": "comms_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/core",
+      "path": "../core/comms/dart",
+      "ref": "main",
+      "sha256": "387afceb37a60acd984cf19571a183c1a31c19696e57de1b387dd202209fb9f9",
+      "_sha256_comment": "SHA-256 of comms/dart/install.py at core@4793dfa; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
+      "_comment": "Push notifications. The lineage this app came from used OneSignal directly; comms_sdk replaces that."
+    },
+    {
+      "name": "telemetry_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/core",
+      "path": "../core/telemetry/dart",
+      "ref": "main",
+      "sha256": "5a0870e7697f1ac57fc0169561eab979e7e6ea5d478a4510a97ac7321f90ab34",
+      "_comment": "Listener counts: how many are tuned in via the app. The dart side exists now (core/telemetry/dart, telemetry_sdk 1.0.0): counts flow through base_sdk's TelemetryClient.track gateway cmd, with telemetry_sdk owning delivery policy via the TelemetryClient.configure transport seam; the frappe side keeps src/telemetry and the api_error_log doctype. Pin = sha256 of core telemetry/dart/install.py as bootstrapped, same pattern as desktop_sdk's entry."
+    },
+    {
+      "name": "promotions_sdk",
+      "enabled": false,
+      "source": "git",
+      "git": "https://github.com/RokctAI/commerce",
+      "path": "../commerce/promotions/dart",
+      "ref": "main",
+      "sha256": "74986f2c877596181c14ecf901a316be90ff4141c5e79b23d62ce81f4d196b15",
+      "_sha256_comment": "SHA-256 of promotions/dart/install.py at commerce@07427e3; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
+      "_comment": "Ad mediation. Disabled by default: the station this was built for runs with ads off (showADS false), so enable per app rather than per template. radio_sdk's player exposes the RadioInterstitialGate GetIt seam for when this gets enabled."
+    },
+    {
+      "name": "desktop_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/hardware",
+      "path": "../hardware/desktop/dart",
+      "ref": "main",
+      "sha256": "188774abbcb8de7dee95dba1444f2c1913a37241826453a987b283646ba756de",
+      "_comment": "TEMPORARY (desktop testing convenience, revert candidate): added to every app profile so all composed apps pull desktop support and can be viewed/tested on desktop. Pin = sha256 of hardware desktop/dart/install.py at main head 84aa6ed, same value as supacharge.json's entry."
+    },
+    {
+      "name": "hms_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/hardware",
+      "path": "../hardware/hms/dart",
+      "ref": "main",
+      "sha256": "197261eff5adae8a5bcbb42ce2dd1f7b16ad15716c4ff4268f9b9a77b3e9517c",
+      "_comment": "Huawei Mobile Services support, built like desktop_sdk (SDK module, not productFlavors). Dart-side: DeviceServices ({gms, hms, neither} detection, cached, fail-open to gms) and an order-30 boot hook that, ONLY on GMS-free HMS-capable devices, boots Push Kit and registers the HMS push token through the same api.user.register_device_token gateway cmd the FCM token uses (provider 'hms'). No installs - the BUILD_HMS-gated AGConnect Gradle wiring lives statically in core's android template, default-off. Strict no-op in every plain GMS build."
+    }
+  ],
+  "host_routes": [],
+  "_comment_host_routes": "Empty on purpose: every route this app needs (/radio, /radio/timer) is declared by radio_sdk's own manifest.json, and base_sdk's shell owns splash/no-connection. Add entries here only for host-composition pages no SDK declares."
+}

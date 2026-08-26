@@ -10,7 +10,11 @@ class MainActivity : FlutterActivity() {
     // lines of real behaviour wrapped in an abandoned dependency. Sending the
     // task to the back keeps the process -- and playback -- alive, which is
     // what the player's "Background" exit does.
-    private val channelName = "app.radio.fm/app_background"
+    //
+    // The channel name is radio_sdk's app-neutral contract (see the SDK's
+    // src/common/services/app_background.dart) - every composed radio app
+    // registers this same channel, whatever its applicationId.
+    private val channelName = "rokct.radio/app_background"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
