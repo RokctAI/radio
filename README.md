@@ -33,3 +33,21 @@ configuration): `RADIO_STREAM_URL`, `RADIO_STATION_NAME`, the drawer's
 Android release signing is CI-injected (`android/key.properties` and the
 keystore are not committed; the build falls back to the debug key without
 them).
+
+<!-- @generated-recompose-start -->
+## Recomposing this app
+
+`lib/` is fully installer-generated and disposable - it is safe to delete
+and is gitignored. Anything app-specific lives in tracked manifests
+(`app_routes`, or `host_routes` in `composer.json`), never in `lib/` itself.
+
+To regenerate it:
+
+```sh
+python3 .rokct/initiate.py   # provisions the composer under .rokct/skills/
+python3 .rokct/skills/.rok/flutter/scripts/compose.py
+```
+
+Session cleanup (`python3 .rokct/end_protocol.py`) wipes the provisioned
+tools again.
+<!-- @generated-recompose-end -->

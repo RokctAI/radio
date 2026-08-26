@@ -57,7 +57,7 @@
       "ref": "main",
       "sha256": "74986f2c877596181c14ecf901a316be90ff4141c5e79b23d62ce81f4d196b15",
       "_sha256_comment": "SHA-256 of promotions/dart/install.py at commerce@07427e3; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
-      "_comment": "Ad mediation. Disabled by default: the station this was built for runs with ads off (showADS false), so enable per app rather than per template. radio_sdk's player exposes the RadioInterstitialGate GetIt seam for when this gets enabled."
+      "_comment": "Ad mediation. Disabled by default: the station this was built for runs with ads off (showADS false), so enable per app rather than per template."
     },
     {
       "name": "desktop_sdk",
@@ -79,7 +79,5 @@
       "sha256": "197261eff5adae8a5bcbb42ce2dd1f7b16ad15716c4ff4268f9b9a77b3e9517c",
       "_comment": "Huawei Mobile Services support, built like desktop_sdk (SDK module, not productFlavors). Dart-side: DeviceServices ({gms, hms, neither} detection, cached, fail-open to gms) and an order-30 boot hook that, ONLY on GMS-free HMS-capable devices, boots Push Kit and registers the HMS push token through the same api.user.register_device_token gateway cmd the FCM token uses (provider 'hms'). No installs - the BUILD_HMS-gated AGConnect Gradle wiring lives statically in core's android template, default-off. Strict no-op in every plain GMS build."
     }
-  ],
-  "host_routes": [],
-  "_comment_host_routes": "Empty on purpose: every route this app needs (/radio, /radio/timer) is declared by radio_sdk's own manifest.json, and base_sdk's shell owns splash/no-connection. Add entries here only for host-composition pages no SDK declares."
+  ]
 }
