@@ -97,10 +97,15 @@ jobs:
       # Deployment Configuration (Immediate release on Main)
       release_strategy: 'weekly'
       build_android: true
-      # No committed windows/ runner in this shell yet (desktop_sdk composes
-      # one at build time, but the pipeline's Windows job expects the runner
-      # in-tree) - flip to true once windows/ is committed like supacharge's.
-      build_windows: false
+      # Build Windows desktop app and attach it to releases. This repo now
+      # carries the committed windows/ runner the pipeline's Windows lane
+      # needs, installed from desktop_sdk's templates/windows (hardware:
+      # desktop/dart/templates/windows) with its ${package} token resolved to
+      # this shell's composer.json package_name - same tree supacharge builds
+      # from. desktop_sdk itself is composed (composer.json, enabled) and its
+      # Windows-only surfaces (DesktopSdkDependencies, comms_sdk's
+      # DesktopNotificationPoller boot hook) only ever run in this build.
+      build_windows: true
       # Opt into Huawei Mobile Services wiring (hms_sdk in composer.json). Gracefully
       # skips to a GMS-only build until agconnect-services.json exists in Occultation.
       build_hms: true

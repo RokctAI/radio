@@ -43,11 +43,16 @@ on:
 jobs:
   release:
     permissions: write-all
-    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@3d7610a646cc9e6e8b1e5837f2e5fa2acbaaef3d # shared-workflows main (build_hms input + guided-tour/store-listing lanes)
+    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@18740da00c9d2806e2ba595d3d07db77d3c29155 # shared-workflows main (adds the Dynamic Source Rename stray-package prune to universal-release.yml)
     with:
       backfill_ai_notes_cutoff_version: ${{ inputs.backfill_ai_notes_cutoff_version }}
       project_type: 'flutter'
-      app-type: 'customer'
+      # Must match build.yml's app-type and this shell's .rokct/config/app_type
+      # marker ('radio'). This file was seeded as a byte-identical copy of
+      # supacharge's release.yml, which carried supacharge's own 'customer'
+      # value - leaving the dispatch release path composing under a different
+      # app_type than the push path that actually builds this repo.
+      app-type: 'radio'
       # Dogfooding: Use the new Weekly Strategy
       release_strategy: 'weekly'
 
