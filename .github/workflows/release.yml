@@ -47,7 +47,12 @@ jobs:
     with:
       backfill_ai_notes_cutoff_version: ${{ inputs.backfill_ai_notes_cutoff_version }}
       project_type: 'flutter'
-      app-type: 'customer'
+      # Must match build.yml's app-type and this shell's .rokct/config/app_type
+      # marker ('radio'). This file was seeded as a byte-identical copy of
+      # supacharge's release.yml, which carried supacharge's own 'customer'
+      # value - leaving the dispatch release path composing under a different
+      # app_type than the push path that actually builds this repo.
+      app-type: 'radio'
       # Dogfooding: Use the new Weekly Strategy
       release_strategy: 'weekly'
 
