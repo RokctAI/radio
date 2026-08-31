@@ -6,6 +6,22 @@ declared in `composer.json` - the vinyl record-player experience itself
 lives in `radio_sdk` (RokctAI/agent, `radio/dart`), which is this app's
 home SDK.
 
+<!-- @generated-tour-gallery-start -->
+## App tour
+
+Styled stills from the committed guided tour - regenerated on every
+tour run, so new screens appear here automatically.
+
+| Welcome | | |
+| :---: | :---: | :---: |
+| ![Welcome][s01] | | |
+
+The full tour lives in the [feature guide](marketing/tour/feature-guide.md),
+with walkthrough videos alongside it in [`marketing/tour/`](marketing/tour).
+
+[s01]: marketing/tour/store/01-welcome.png
+<!-- @generated-tour-gallery-end -->
+
 ## How it fits together
 
 - `composer.json` - the SDK roster (every enabled entry pinned by the
