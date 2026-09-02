@@ -12,14 +12,24 @@ home SDK.
 Styled stills from the committed guided tour - regenerated on every
 tour run, so new screens appear here automatically.
 
-| Welcome | | |
+| Welcome | Radio Player | Radio Shows |
 | :---: | :---: | :---: |
-| ![Welcome][s01] | | |
+| ![Welcome][s01] | ![Radio Player][s02] | ![Radio Shows][s03] |
+| **Radio Stations** | **Radio Profile** | **Radio Sleep Timer** |
+| ![Radio Stations][s04] | ![Radio Profile][s05] | ![Radio Sleep Timer][s06] |
+| **Radio Timer Set** | | |
+| ![Radio Timer Set][s07] | | |
 
 The full tour lives in the [feature guide](marketing/tour/feature-guide.md),
 with walkthrough videos alongside it in [`marketing/tour/`](marketing/tour).
 
 [s01]: marketing/tour/store/01-welcome.png
+[s02]: marketing/tour/store/02-radio_player.png
+[s03]: marketing/tour/store/03-radio_shows.png
+[s04]: marketing/tour/store/04-radio_stations.png
+[s05]: marketing/tour/store/05-radio_profile.png
+[s06]: marketing/tour/store/06-radio_sleep_timer.png
+[s07]: marketing/tour/store/07-radio_timer_set.png
 <!-- @generated-tour-gallery-end -->
 
 ## How it fits together
