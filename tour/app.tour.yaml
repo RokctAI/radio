@@ -35,7 +35,7 @@ tour:
   - step:
       key: welcome
       title: "Welcome to Musina FM"
-      caption: "{app_name} - *{app_tagline}* - opens straight onto the record player."
+      caption: "{app_name} - {app_tagline} - opens straight onto the *record player*."
       action: wait
       settle: 12
   # radio_sdk owns the player and sleep-timer screens.
