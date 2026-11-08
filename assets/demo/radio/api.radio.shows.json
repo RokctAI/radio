@@ -1,0 +1,17 @@
+{
+  "on_now": {"time": "12:00 – 15:00", "name": "Midday Motion", "host": "with Zanele Mahlangu", "followed": true, "on_air": true, "artwork_url": "https://shows.invalid/midday.png"},
+  "today": [
+    {"time": "06:00", "name": "Vuka Vuka Breakfast", "host": "Sipho & Lelethu", "followed": true},
+    {"time": "09:00", "name": "Mid-Morning Hustle", "host": "Thandi Mbeki"},
+    {"time": "12:00", "name": "Midday Motion", "host": "Zanele Mahlangu", "followed": true, "on_air": true},
+    {"time": "15:00", "name": "Amaculo Drive", "host": "DJ Katlego", "followed": true},
+    {"time": "18:00", "name": "Evening News Hour", "host": "Khanya newsroom"},
+    {"time": "20:00", "name": "Uplift Gospel Hour", "host": "Ma Dlamini"}
+  ],
+  "catch_up": [
+    {"name": "Vuka Vuka Breakfast", "aired": "This morning 06:00", "remaining": "18h left", "artwork_url": "https://shows.invalid/vuka.png"},
+    {"name": "Uplift Gospel Hour", "aired": "Yesterday 20:00", "remaining": "3h left", "urgent": true, "artwork_url": "https://shows.invalid/gospel.png"},
+    {"name": "Evening News Hour", "aired": "Yesterday 18:00", "remaining": "9h left", "artwork_url": "https://shows.invalid/news.png"}
+  ],
+  "quota_line": "2 of 4 free catch-ups left"
+}

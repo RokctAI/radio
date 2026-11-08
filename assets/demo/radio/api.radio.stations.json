@@ -1,0 +1,5 @@
+[
+  {"id": "demo-groove", "name": "Groove Salad", "stream_url": "https://ice1.somafm.com/groovesalad-128-mp3", "is_active": 1, "sort_order": 0},
+  {"id": "demo-drone", "name": "Drone Zone", "stream_url": "https://ice1.somafm.com/dronezone-128-mp3", "is_active": 0, "sort_order": 1},
+  {"id": "demo-indie", "name": "Indie Pop", "stream_url": "https://ice1.somafm.com/indiepop-128-mp3", "is_active": 0, "sort_order": 2}
+]
