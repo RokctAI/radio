@@ -23,8 +23,9 @@
 app:
   name: Musina FM
   tagline: Can you handle the Heat?
-  # Committed app logo (transparent background), shown on the video end card.
-  logo: assets/images/logo2.png
+  # The real launcher icon (same file the phone shows), so the store art and
+  # end card carry the app's own icon, in one row with the name.
+  logo: android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
   # The committed native splash art (also what flutter_native_splash uses).
   splash: assets/images/splash.png
 video:
@@ -40,3 +41,14 @@ tour:
       settle: 12
   # radio_sdk owns the player and sleep-timer screens.
   - fragment: radio
+store:
+  # Play feature graphic: the record player, in the house styled layout.
+  feature_step: welcome
+  feature_style:
+    bg: "#FF6600"
+    bg2: "#C2410C"
+    ink: "#FFFFFF"
+    accent: "#111111"
+    shape: "circle"
+    layout: "left"
+    headline: "Your station, everywhere you go."
