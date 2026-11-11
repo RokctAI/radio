@@ -42,13 +42,17 @@ tour:
   # radio_sdk owns the player and sleep-timer screens.
   - fragment: radio
 store:
-  # Play feature graphic: the record player, in the house styled layout.
-  feature_step: welcome
+  # Play feature graphic: a station playing beside today's shows, in the
+  # house two-phone layout the other shells use.
+  feature_step: radio_play
   feature_style:
-    bg: "#FF6600"
-    bg2: "#C2410C"
+    bg: "#14100D"
+    bg2: "#2A1A10"
     ink: "#FFFFFF"
-    accent: "#111111"
+    accent: "#FF6600"
+    chip: "#FF6600"
     shape: "circle"
-    layout: "left"
-    headline: "Your station, everywhere you go."
+    layout: "duo"
+    hero2: radio_shows
+    tilt: 5
+    headline: "Your station, always on."
