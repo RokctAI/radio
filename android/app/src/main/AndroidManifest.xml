@@ -72,6 +72,11 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
 
+        <!-- @sdk-android-application-start -->
+        <activity android:name=".SessionHandoffActivity" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" android:permission="rokct.permission.SESSION_HANDOFF" android:taskAffinity="" android:theme="@android:style/Theme.Translucent.NoTitleBar"><intent-filter><action android:name="rokct.intent.action.SESSION_HANDOFF"/><category android:name="android.intent.category.DEFAULT"/></intent-filter></activity>
+        <service android:name="com.ryanheise.audioservice.AudioService" android:foregroundServiceType="mediaPlayback" android:exported="true"><intent-filter><action android:name="android.media.browse.MediaBrowserService" /></intent-filter></service>
+        <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver" android:exported="true"><intent-filter><action android:name="android.intent.action.MEDIA_BUTTON" /></intent-filter></receiver>
+        <!-- @sdk-android-application-end -->
     </application>
 
     <queries>

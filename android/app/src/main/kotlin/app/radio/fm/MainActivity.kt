@@ -3,8 +3,9 @@ package app.radio.fm
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import com.ryanheise.audioservice.AudioServiceActivity
 
-class MainActivity : FlutterActivity() {
+class MainActivity : AudioServiceActivity() {
 
     // Replaces the discontinued back_button_behavior plugin, which was three
     // lines of real behaviour wrapped in an abandoned dependency. Sending the
