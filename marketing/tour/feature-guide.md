@@ -16,37 +16,50 @@ Musina FM - Can you handle the Heat? - opens straight onto the record player.
 
 ![Your station, live](screenshots/02-radio_player.png)
 
-Musina FM opens straight into the player - artwork, track and transport, one tap
-from on air - your stations fanned like a deck of cards, the now-playing pill
-floating beneath.
+Musina FM opens into the player - artwork, track and transport one tap from on
+air, stations fanned above the now-playing pill.
 
-## 3. Shows, one swipe away
+## 3. Press play
 
-![Shows, one swipe away](screenshots/03-radio_shows.png)
+![Press play](screenshots/03-radio_play.png)
+
+One tap and the station is on air - it keeps playing on the lock screen with the
+app closed.
+
+## 4. Next station
+
+![Next station](screenshots/04-radio_next_station.png)
+
+Skip to the next station from the app, the notification or the lock screen -
+playback follows.
+
+## 5. Shows, one swipe away
+
+![Shows, one swipe away](screenshots/05-radio_shows.png)
 
 Swipe right for the programme - what's on now, today's line-up with follow
 bells, and catch-up cards before they expire.
 
-## 4. Every station in one place
+## 6. Every station in one place
 
-![Every station in one place](screenshots/04-radio_stations.png)
+![Every station in one place](screenshots/06-radio_stations.png)
 
 The whole roster on one page - retune with a tap and the player follows.
 
-## 5. Yours, signed in or not
+## 7. Yours, signed in or not
 
-![Yours, signed in or not](screenshots/05-radio_profile.png)
+![Yours, signed in or not](screenshots/07-radio_profile.png)
 
 Your identity, your plan and the app's links, all in one quiet place.
 
-## 6. Sleep timer
+## 8. Sleep timer
 
-![Sleep timer](screenshots/06-radio_sleep_timer.png)
+![Sleep timer](screenshots/08-radio_sleep_timer.png)
 
 Drift off with the radio on - the sleep timer stops playback for you.
 
-## 7. Set and forget
+## 9. Set and forget
 
-![Set and forget](screenshots/07-radio_timer_set.png)
+![Set and forget](screenshots/09-radio_timer_set.png)
 
 Spin the dial and the countdown is ready when you are.
