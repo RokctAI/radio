@@ -33,6 +33,19 @@ with walkthrough videos alongside it in [`marketing/tour/`](marketing/tour).
 [s08]: marketing/tour/store/08-radio_timer_set.png
 <!-- @generated-tour-gallery-end -->
 
+<!-- @generated-render-strip-start -->
+## Design review strip
+
+[render-strip.html](marketing/tour/render-strip.html)
+is one self-contained page of this app's real screens - rendered
+headlessly from the code in this commit, before the tour's emulator
+legs ran, with every point numbered from the widget's own measured
+rectangle.
+
+GitHub serves a committed .html file as source, so open it from a
+local checkout (or download the raw file) to read the page.
+<!-- @generated-render-strip-end -->
+
 ## How it fits together
 
 - `composer.json` - the SDK roster (every enabled entry pinned by the
