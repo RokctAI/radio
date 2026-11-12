@@ -1,0 +1,48 @@
+{
+  "title": "Home - Musina FM",
+  "kicker": "render-strip kit adoption - real render, demo data",
+  "lede": "Not hand-drawn. Both frames are the actual Radio home - RadioPage with its record player, station strip and now-playing bar - rendered headlessly to PNG at 390 x 844 logical px / dpr 3, with every numbered point placed from the widget's measured rect.",
+  "fonts": "system",
+  "chips_default": true,
+  "frames": [
+    {
+      "section": "Shipped - what main renders today",
+      "caption": "home - dark (app default)",
+      "status": "SHIPPED",
+      "png": "radio_home_dark.png",
+      "rects": "radio_home_dark.json",
+      "note": "radio main, composed SDK set from composer.json"
+    },
+    {
+      "section": "Shipped - what main renders today",
+      "caption": "home - light",
+      "status": "SHIPPED",
+      "png": "radio_home_light.png",
+      "rects": "radio_home_light.json",
+      "note": "radio main, composed SDK set from composer.json"
+    }
+  ],
+  "labels": {
+    "radio.title": "station name and what is on",
+    "radio.record_player": "record player - the app's own artwork",
+    "radio.now_bar": "now playing bar - station, volume and play"
+  },
+  "numbering": {
+    "map": {
+      "radio.title": 1,
+      "radio.record_player": 2,
+      "radio.now_bar": 3
+    },
+    "retired": {}
+  },
+  "notes": [
+    {
+      "kicker": "note - how these renders were produced",
+      "body": [
+        "A widget-test harness (test/render/render_screen_test.dart); no app code touched. It pumps the real RadioPage inside the app's own theme pair at one phone screen (390 x 844): the page is a full-screen player laid out against the viewport, so there is no longer content to fit.",
+        "Stations come from radio_sdk's demo data (DemoSession active, RadioSdkDependencies registered as main.dart does). The only stand-in is the audio player: a widget test has no audio_service host, so a silent RadioAudioEngine is bound through the SDK's own GetIt seam. Nothing plays; everything drawn is the app's.",
+        "Light and dark frames look alike on purpose: Radio's home draws its own liquid background rather than the theme surface."
+      ]
+    }
+  ]
+}
