@@ -15,6 +15,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'dart:math' as math;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:radio_sdk/src/common/application/playback/playback_provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 typedef TourAction = Future<void> Function(
@@ -37,23 +40,67 @@ Future<void> tourSetup() async {
 }
 
 final List<TourStep> tourSteps = <TourStep>[
-  TourStep('welcome', 12000, true, (WidgetTester tester, StackRouter router) async {
-    // wait: settle only.
-  }),
   TourStep('radio_player', 10000, true, (WidgetTester tester, StackRouter router) async {
     router.replaceNamed('/radio');
+  }),
+  TourStep('radio_play', 8000, true, (WidgetTester tester, StackRouter router) async {
+    // Start the tuned station through PlaybackNotifier - the same call
+    // the now-bar's play button makes. The runner cannot lock the
+    // device, so the lock-screen / notification controls themselves are
+    // not captured; this still shows the in-app playing state. Offline
+    // the stream may stay buffering - the frame is captured as-is.
+    final Element element = tester.element(find.byType(Navigator).first);
+    final ProviderContainer container =
+        ProviderScope.containerOf(element, listen: false);
+    container.read(playbackProvider.notifier).play();
+    // Bounded pumps, never pumpAndSettle - see radio_home_return.
+    for (int i = 0; i < 20; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+  }),
+  TourStep('radio_next_station', 8000, true, (WidgetTester tester, StackRouter router) async {
+    // stepStation(1) is exactly what the lock-screen / notification
+    // "next" control runs (PlaybackNotifier._onRemoteCommand), so this
+    // drives the real prev/next path without locking the device. It
+    // steps through favourites, or the whole demo roster when none.
+    final Element element = tester.element(find.byType(Navigator).first);
+    final ProviderContainer container =
+        ProviderScope.containerOf(element, listen: false);
+    // Not awaited: with playback on, stepStation awaits startStream,
+    // which an offline emulator may never complete; the bounded pumps
+    // below give the retune time to reach the screen.
+    // ignore: unawaited_futures
+    container.read(playbackProvider.notifier).stepStation(1);
+    // Bounded pumps, never pumpAndSettle - see radio_home_return.
+    for (int i = 0; i < 40; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
   }),
   TourStep('radio_shows', 8000, true, (WidgetTester tester, StackRouter router) async {
     // The sub-pages live inside RadioShell's horizontal pager and have
     // no routes of their own. On Home the floating pill is the now-bar
     // (the nav tabs only appear on sub-pages), so this step travels the
-    // way listeners do: a swipe on the pager toward Shows. Tolerant: if
-    // no pager is on screen, the current frame is captured as-is.
+    // way listeners do: a swipe on the pager toward Shows. On a WIDE
+    // window (the tablet leg) there is no pager at all - Home stays full
+    // screen and the sub-pages arrive as a one-plane overlay from the
+    // nav rail's tabs (section 48, Ray's overlay ruling) - so the step
+    // taps the Shows tab, which the rail keeps under the same stable
+    // key. Tolerant: neither on screen means the frame is captured
+    // as-is.
     final Finder pager = find.byType(PageView);
+    final Finder showsTab = find.byKey(const ValueKey('radio-tab-shows'));
     if (pager.evaluate().isNotEmpty) {
       await tester.drag(pager.first, const Offset(600, 0),
           warnIfMissed: false);
-      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+      // Bounded pumps, never pumpAndSettle - see radio_home_return.
+      for (int i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+    } else if (showsTab.evaluate().isNotEmpty) {
+      await tester.tap(showsTab.first, warnIfMissed: false);
+      for (int i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
     }
   }),
   TourStep('radio_stations', 8000, true, (WidgetTester tester, StackRouter router) async {
@@ -64,7 +111,10 @@ final List<TourStep> tourSteps = <TourStep>[
     final Finder tab = find.byKey(const ValueKey('radio-tab-stations'));
     if (tab.evaluate().isNotEmpty) {
       await tester.tap(tab.first, warnIfMissed: false);
-      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+      // Bounded pumps, never pumpAndSettle - see radio_home_return.
+      for (int i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
     }
   }),
   TourStep('radio_profile', 8000, true, (WidgetTester tester, StackRouter router) async {
@@ -72,17 +122,37 @@ final List<TourStep> tourSteps = <TourStep>[
     final Finder tab = find.byKey(const ValueKey('radio-tab-profile'));
     if (tab.evaluate().isNotEmpty) {
       await tester.tap(tab.first, warnIfMissed: false);
-      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+      // Bounded pumps, never pumpAndSettle - see radio_home_return.
+      for (int i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
     }
   }),
   TourStep('radio_home_return', 4000, false, (WidgetTester tester, StackRouter router) async {
     // Pure navigation (no still): finish the pager loop back on Home so
     // the timer chapter starts from the player, the way a listener
     // would. Tolerant like the other tab hops.
+    //
+    // NEVER pumpAndSettle HERE. RadioShell parks Home under a
+    // Visibility(maintainState: true) whose TickerMode is off while a
+    // sub-page fully covers it, so LiquidBackground's free-running
+    // ticker (widgets/liquid_background.dart) is muted on Shows /
+    // Stations / Profile and those hops settle. Landing back on Home
+    // un-mutes it, and a ticker that never stops means
+    // `binding.hasScheduledFrame` is never false - pumpAndSettle cannot
+    // return. In run 33628026749 this step's pumpAndSettle hit the
+    // runner's 90-second wall ("TimeoutException after 0:01:30"), which
+    // ABANDONED an in-flight guarded call: every later guarded API then
+    // threw "Guarded function conflict.", so radio_sleep_timer and
+    // radio_timer_set never navigated and the capture re-shot the player
+    // frame for both of their stills. Bounded pumps cover the same
+    // 600ms and always terminate.
     final Finder tab = find.byKey(const ValueKey('radio-tab-home'));
     if (tab.evaluate().isNotEmpty) {
       await tester.tap(tab.first, warnIfMissed: false);
-      await tester.pumpAndSettle(const Duration(milliseconds: 600));
+      for (int i = 0; i < 12; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
     }
   }),
   TourStep('radio_sleep_timer', 6000, true, (WidgetTester tester, StackRouter router) async {
@@ -94,11 +164,28 @@ final List<TourStep> tourSteps = <TourStep>[
     // dial, so the step drags the dial a little to put a non-zero
     // countdown on screen before the capture. Tolerant: if the dial is
     // not on screen, the timer page is simply captured as-is.
+    // The drag must START ON THE RING: SleekCircularSlider ignores a
+    // pan that begins at its centre, which is where tester.drag starts,
+    // so the countdown stayed 00:00 and this still was byte-identical to
+    // radio_sleep_timer (the assembler refuses duplicate frames). Start
+    // at 12 o'clock on the track and sweep clockwise, in steps, so the
+    // pan recogniser sees real movement.
     final Finder dial = find.byType(SleekCircularSlider);
     if (dial.evaluate().isNotEmpty) {
-      await tester.drag(dial.first, const Offset(70, 0),
-          warnIfMissed: false);
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+      final Rect r = tester.getRect(dial.first);
+      final Offset start = Offset(r.center.dx, r.top + r.height * 0.06);
+      final TestGesture g = await tester.startGesture(start);
+      for (int i = 1; i <= 8; i++) {
+        final double a = -math.pi / 2 + i * (math.pi / 8);
+        await g.moveTo(r.center +
+            Offset(math.cos(a), math.sin(a)) * (r.width * 0.44));
+        await tester.pump(const Duration(milliseconds: 30));
+      }
+      await g.up();
+      // Bounded pumps, never pumpAndSettle - see radio_home_return.
+      for (int i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 50));
+      }
     }
   }),
 ];
