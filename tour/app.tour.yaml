@@ -31,12 +31,9 @@ video:
   hook: "Your station, everywhere you go."
   offer: "Tune in today."
 tour:
-  # Splash settles onto the player - the home SDK's entry page.
-  - step:
-      key: welcome
-      title: "Welcome to Musina FM"
-      caption: "{app_name} - {app_tagline} - opens straight onto the *record player*."
-      action: wait
-      settle: 12
+  # No separate welcome still: Radio has no sign-in, so the splash settles
+  # straight onto the player and a welcome step captured the same frame as
+  # radio_player (the assembler refuses duplicate stills). radio_player is
+  # the opening shot.
   # radio_sdk owns the player and sleep-timer screens.
   - fragment: radio

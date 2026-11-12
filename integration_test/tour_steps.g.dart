@@ -40,9 +40,6 @@ Future<void> tourSetup() async {
 }
 
 final List<TourStep> tourSteps = <TourStep>[
-  TourStep('welcome', 12000, true, (WidgetTester tester, StackRouter router) async {
-    // wait: settle only.
-  }),
   TourStep('radio_player', 10000, true, (WidgetTester tester, StackRouter router) async {
     router.replaceNamed('/radio');
   }),
