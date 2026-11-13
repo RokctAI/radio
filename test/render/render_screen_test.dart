@@ -349,7 +349,6 @@ Widget buildScreen({required bool dark}) {
   );
 }
 
-
 // WHEN THE SCREEN UNDER TEST IS A MODAL, a bottom sheet or a dialog.
 //
 // PREFERRED - drive the app's own trigger. Call this from the render body
@@ -473,10 +472,10 @@ List<ElementSpec> elementSpecs() {
 /// card), not the page scaffold, which exists while the data is still
 /// loading. A fixed sleep here is what shipped blank light frames.
 List<Finder> readyFinders() => <Finder>[
-  find.byType(AnimatedStand),
-  find.byType(RadioNowBar),
-  // find.byType(LmsSettingCard),
-];
+      find.byType(AnimatedStand),
+      find.byType(RadioNowBar),
+      // find.byType(LmsSettingCard),
+    ];
 
 /// TODO(harness) 8/8 - real fonts.
 ///
@@ -503,7 +502,8 @@ Future<void> loadRealFonts() async {
     for (final w in <String>['Light', 'Regular', 'Medium', 'Semibold', 'Bold'])
       '$root/assets/fonts/ClashGrotesk-$w.ttf',
   ]);
-  await load('ClashDisplay', <String>['$root/assets/fonts/ClashDisplay-Bold.ttf']);
+  await load(
+      'ClashDisplay', <String>['$root/assets/fonts/ClashDisplay-Bold.ttf']);
 
   // Bare TextStyles with no family fall back to the platform default. The
   // same three weights also ship inside the Flutter SDK cache as
@@ -579,8 +579,8 @@ Future<void> loadRealFonts() async {
 /// One numbered point: a finder, a stable key, and a human label.
 class ElementSpec {
   ElementSpec({required this.key, required this.label, required this.finder})
-    : keyOf = null,
-      labelOf = null;
+      : keyOf = null,
+        labelOf = null;
 
   /// A finder that matches SEVERAL widgets (e.g. every settings row); key and
   /// label are derived per match, so the numbering stays per-row.
@@ -588,8 +588,8 @@ class ElementSpec {
     required this.keyOf,
     required this.labelOf,
     required this.finder,
-  }) : key = '',
-       label = '';
+  })  : key = '',
+        label = '';
 
   final String key;
   final String label;
@@ -652,8 +652,7 @@ Future<void> _pumpUntilReady(WidgetTester tester, {String phase = ''}) async {
       () => Future<void>.delayed(const Duration(milliseconds: 50)),
     );
     await tester.pump(const Duration(milliseconds: 100));
-    final ready =
-        finders.every((f) => f.evaluate().isNotEmpty) &&
+    final ready = finders.every((f) => f.evaluate().isNotEmpty) &&
         spinner.evaluate().isEmpty;
     stableFrames = ready ? stableFrames + 1 : 0;
     if (stableFrames >= 2) break;
@@ -675,8 +674,6 @@ Future<void> _pumpUntilReady(WidgetTester tester, {String phase = ''}) async {
     await tester.pump(const Duration(milliseconds: 100));
   }
 }
-
-
 
 void _setViewHeight(WidgetTester tester, double height) {
   tester.view.physicalSize = Size(
@@ -819,8 +816,7 @@ Future<void> renderVariant(
   expect(
     measured,
     isNotEmpty,
-    reason:
-        'no elements matched - check elementSpecs() and the gates in '
+    reason: 'no elements matched - check elementSpecs() and the gates in '
         'registerScreen()',
   );
 

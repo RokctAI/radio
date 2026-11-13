@@ -70,8 +70,8 @@ class VectorSvgFonts {
     if (!dir.existsSync()) return;
     _scanned.addAll(
       dir.listSync().whereType<File>().where(
-        (f) => f.path.endsWith('.ttf') || f.path.endsWith('.otf'),
-      ),
+            (f) => f.path.endsWith('.ttf') || f.path.endsWith('.otf'),
+          ),
     );
   }
 
@@ -368,8 +368,7 @@ class VectorSvgRecorder implements Canvas {
 
   String _transformAttr(Matrix4 m) {
     final s = m.storage;
-    final identity =
-        s[0] == 1 &&
+    final identity = s[0] == 1 &&
         s[1] == 0 &&
         s[4] == 0 &&
         s[5] == 1 &&
@@ -410,9 +409,8 @@ class VectorSvgRecorder implements Canvas {
     final c = paint.color;
     final a = _alpha(c);
     if (paint.style == PaintingStyle.stroke) {
-      final w = paint.strokeWidth == 0
-          ? 1 / devicePixelRatio
-          : paint.strokeWidth;
+      final w =
+          paint.strokeWidth == 0 ? 1 / devicePixelRatio : paint.strokeWidth;
       buf.write(' fill="none" stroke="${_hex(c)}" stroke-width="${_n(w)}"');
       if (a < 1) buf.write(' stroke-opacity="${_n(a)}"');
       if (paint.strokeCap != StrokeCap.butt) {
@@ -442,13 +440,11 @@ class VectorSvgRecorder implements Canvas {
     if (m == null) return null;
     final sigma = double.parse(m.group(2)!);
     final key = _n(sigma);
-    return _filters
-        .putIfAbsent(key, () {
-          return '<filter id="b${key.replaceAll('.', '_')}" x="-50%" y="-50%" '
-              'width="200%" height="200%"><feGaussianBlur stdDeviation="$key"/>'
-              '</filter>';
-        })
-        .split('"')[1];
+    return _filters.putIfAbsent(key, () {
+      return '<filter id="b${key.replaceAll('.', '_')}" x="-50%" y="-50%" '
+          'width="200%" height="200%"><feGaussianBlur stdDeviation="$key"/>'
+          '</filter>';
+    }).split('"')[1];
   }
 
   bool _needsRaster(Paint paint) =>
@@ -537,8 +533,7 @@ class VectorSvgRecorder implements Canvas {
 
   String _rrectElement(RRect rrect) {
     final r = rrect.scaleRadii();
-    final uniform =
-        r.tlRadius == r.trRadius &&
+    final uniform = r.tlRadius == r.trRadius &&
         r.tlRadius == r.brRadius &&
         r.tlRadius == r.blRadius;
     if (uniform) {
@@ -748,9 +743,8 @@ class VectorSvgRecorder implements Canvas {
   @override
   void saveLayer(Rect? bounds, Paint paint) {
     final a = _alpha(paint.color);
-    final filter = paint.colorFilter == null
-        ? null
-        : _colorFilterAttr(paint.colorFilter!);
+    final filter =
+        paint.colorFilter == null ? null : _colorFilterAttr(paint.colorFilter!);
     _openGroup('${a < 1 ? ' opacity="${_n(a)}"' : ''}${filter ?? ''}');
   }
 
@@ -876,7 +870,8 @@ class VectorSvgRecorder implements Canvas {
   void clipRSuperellipse(
     ui.RSuperellipse rsuperellipse, {
     bool doAntiAlias = true,
-  }) => _clip(_rrectElement(_approx(rsuperellipse)));
+  }) =>
+      _clip(_rrectElement(_approx(rsuperellipse)));
 
   @override
   void clipPath(Path path, {bool doAntiAlias = true}) =>
@@ -889,15 +884,15 @@ class VectorSvgRecorder implements Canvas {
   Rect getDestinationClipBounds() => Offset.zero & _size;
 
   RRect _approx(ui.RSuperellipse r) => RRect.fromLTRBAndCorners(
-    r.left,
-    r.top,
-    r.right,
-    r.bottom,
-    topLeft: r.tlRadius,
-    topRight: r.trRadius,
-    bottomRight: r.brRadius,
-    bottomLeft: r.blRadius,
-  );
+        r.left,
+        r.top,
+        r.right,
+        r.bottom,
+        topLeft: r.tlRadius,
+        topRight: r.trRadius,
+        bottomRight: r.brRadius,
+        bottomLeft: r.blRadius,
+      );
 
   // -------------------------------------------------------------------------
   // Canvas: drawing
@@ -936,8 +931,7 @@ class VectorSvgRecorder implements Canvas {
     _shape(
       'line',
       stroke,
-      extra:
-          ' x1="${_n(p1.dx)}" y1="${_n(p1.dy)}" '
+      extra: ' x1="${_n(p1.dx)}" y1="${_n(p1.dy)}" '
           'x2="${_n(p2.dx)}" y2="${_n(p2.dy)}"',
     );
   }
@@ -953,8 +947,7 @@ class VectorSvgRecorder implements Canvas {
     _shape(
       'rect',
       paint,
-      extra:
-          ' x="${_n(rect.left)}" y="${_n(rect.top)}" '
+      extra: ' x="${_n(rect.left)}" y="${_n(rect.top)}" '
           'width="${_n(rect.width)}" height="${_n(rect.height)}"',
     );
   }
@@ -984,8 +977,7 @@ class VectorSvgRecorder implements Canvas {
     _shape(
       'path',
       paint,
-      extra:
-          ' d="${_rrectPath(outer)}${_rrectPath(inner)}" '
+      extra: ' d="${_rrectPath(outer)}${_rrectPath(inner)}" '
           'fill-rule="evenodd"',
     );
   }
@@ -1001,8 +993,7 @@ class VectorSvgRecorder implements Canvas {
     _shape(
       'ellipse',
       paint,
-      extra:
-          ' cx="${_n(rect.center.dx)}" cy="${_n(rect.center.dy)}" '
+      extra: ' cx="${_n(rect.center.dx)}" cy="${_n(rect.center.dy)}" '
           'rx="${_n(rect.width / 2)}" ry="${_n(rect.height / 2)}"',
     );
   }
@@ -1069,11 +1060,11 @@ class VectorSvgRecorder implements Canvas {
 
   @override
   void drawImage(ui.Image image, Offset offset, Paint paint) => drawImageRect(
-    image,
-    Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
-    offset & Size(image.width.toDouble(), image.height.toDouble()),
-    paint,
-  );
+        image,
+        Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()),
+        offset & Size(image.width.toDouble(), image.height.toDouble()),
+        paint,
+      );
 
   @override
   void drawImageRect(ui.Image image, Rect src, Rect dst, Paint paint) {
@@ -1157,8 +1148,7 @@ class VectorSvgRecorder implements Canvas {
         _shape(
           'polyline',
           stroke,
-          extra:
-              ' points="'
+          extra: ' points="'
               '${points.map((p) => '${_n(p.dx)},${_n(p.dy)}').join(' ')}"',
         );
     }
@@ -1166,10 +1156,13 @@ class VectorSvgRecorder implements Canvas {
 
   @override
   void drawRawPoints(ui.PointMode pointMode, Float32List points, Paint paint) =>
-      drawPoints(pointMode, <Offset>[
-        for (var i = 0; i + 1 < points.length; i += 2)
-          Offset(points[i], points[i + 1]),
-      ], paint);
+      drawPoints(
+          pointMode,
+          <Offset>[
+            for (var i = 0; i + 1 < points.length; i += 2)
+              Offset(points[i], points[i + 1]),
+          ],
+          paint);
 
   @override
   void drawVertices(ui.Vertices vertices, BlendMode blendMode, Paint paint) =>
@@ -1187,18 +1180,19 @@ class VectorSvgRecorder implements Canvas {
     BlendMode? blendMode,
     Rect? cullRect,
     Paint paint,
-  ) => _raster(
-    Offset.zero & _size,
-    (c) => c.drawAtlas(
-      atlas,
-      transforms,
-      rects,
-      colors,
-      blendMode,
-      cullRect,
-      paint,
-    ),
-  );
+  ) =>
+      _raster(
+        Offset.zero & _size,
+        (c) => c.drawAtlas(
+          atlas,
+          transforms,
+          rects,
+          colors,
+          blendMode,
+          cullRect,
+          paint,
+        ),
+      );
 
   @override
   void drawRawAtlas(
@@ -1209,18 +1203,19 @@ class VectorSvgRecorder implements Canvas {
     BlendMode? blendMode,
     Rect? cullRect,
     Paint paint,
-  ) => _raster(
-    Offset.zero & _size,
-    (c) => c.drawRawAtlas(
-      atlas,
-      rstTransforms,
-      rects,
-      colors,
-      blendMode,
-      cullRect,
-      paint,
-    ),
-  );
+  ) =>
+      _raster(
+        Offset.zero & _size,
+        (c) => c.drawRawAtlas(
+          atlas,
+          rstTransforms,
+          rects,
+          colors,
+          blendMode,
+          cullRect,
+          paint,
+        ),
+      );
 
   @override
   void drawShadow(
